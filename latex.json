@@ -1,0 +1,186 @@
+{
+	"[G] Aligned": {
+		"prefix": "ali",
+		"body": [
+			"\\begin{aligned}",
+			"\t${1:$TM_SELECTED_TEXT}",
+			"\\end{aligned}"
+		]
+	},
+	"[G] Gathered": {
+		"prefix": "gath",
+		"body": [
+			"\\begin{gathered}",
+			"\t${1:$TM_SELECTED_TEXT}",
+			"\\end{gathered}"
+		]
+	},
+	"[G] Cases": {
+		"prefix": "cas",
+		"body": [
+			"\\begin{cases}",
+			"\t${1:$TM_SELECTED_TEXT}",
+			"\\end{cases}"
+		]
+	},
+	"[G] Enumerate": {
+		"prefix": "enm",
+		"body": [
+			"\\begin{enumerate}",
+			"\t\\item ${1:$TM_SELECTED_TEXT}",
+			"\\end{enumerate}"
+		]
+	},
+	"[G] Itemize": {
+		"prefix": "itz",
+		"body": [
+			"\\begin{itemize}",
+			"\t\\item ${1:$TM_SELECTED_TEXT}",
+			"\\end{itemize}"
+		]
+	},
+	"[G] Add margin": {
+		"prefix": "admg",
+		"body": [
+			"\\begin{addmargin}[${1:1em}]{${2:0em}}",
+			"\t${3:$TM_SELECTED_TEXT}",
+			"\\end{addmargin}"
+		]
+	},
+	"[G] Math in-line": {
+		"prefix": "mi",
+		"body": [
+			"\\(${1:$TM_SELECTED_TEXT}\\)"
+		]
+	},
+	"[G] Under-brace": {
+		"prefix": "unbc",
+		"body": [
+			"\\underbrace{${1:$TM_SELECTED_TEXT}}_{$2}"
+		]
+	},
+	"[G] Over-brace": {
+		"prefix": "ovbc",
+		"body": [
+			"\\overbrace{${1:$TM_SELECTED_TEXT}}_{$2}"
+		]
+	},
+	"Mathrm": {
+		"prefix": "mrm",
+		"body": [
+			"\\mathrm{${1:$TM_SELECTED_TEXT}}"
+		]
+	},
+	"[G] Bold": {
+		"prefix": "bld",
+		"body": [
+			"\\textbf{${1:$TM_SELECTED_TEXT}}"
+		]
+	},
+	"[G] Italic": {
+		"prefix": "itl",
+		"body": [
+			"\\textit{${1:$TM_SELECTED_TEXT}}"
+		]
+	},
+	"[G] Square root": {
+		"prefix": "sqt",
+		"body": [
+			"\\sqrt{${1:$TM_SELECTED_TEXT}}"
+		]
+	},
+	"[G] Fraction": {
+		"prefix": "ff",
+		"body": [
+			"\\frac{${1:$TM_SELECTED_TEXT}}{$2}"
+		]
+	},
+	"[G] Vector": {
+		"prefix": "vv",
+		"body": [
+			"\\vv{${1:$TM_SELECTED_TEXT}}"
+		]
+	},
+	"[G] Bar": {
+		"prefix": "bar",
+		"body": [
+			"\\overline{${1:$TM_SELECTED_TEXT}}"
+		]
+	},
+	"[G] Hat": {
+		"prefix": "hat",
+		"body": [
+			"\\hat{${1:$TM_SELECTED_TEXT}}"
+		]
+	},
+	"[G] Dot": {
+		"prefix": "dot",
+		"body": [
+			"\\dot{${1:$TM_SELECTED_TEXT}}"
+		]
+	},
+	"[G] Chemistry equation": {
+		"prefix": "ce",
+		"body": [
+			"\\ce{${1:$TM_SELECTED_TEXT}}"
+		]
+	},
+	"[G] Chapter": {
+		"prefix": "chp",
+		"body": [
+			"\\chapter{${1:$TM_SELECTED_TEXT}}",
+			"",
+			"$0"
+		]
+	},
+	"[G] Section": {
+		"prefix": "sec",
+		"body": [
+			"\\section{${1:$TM_SELECTED_TEXT}}",
+			"",
+			"$0"
+		]
+	},
+	"[G] Subsection": {
+		"prefix": "ssec",
+		"body": [
+			"\\subsection{${1:$TM_SELECTED_TEXT}}",
+			"",
+			"$0"
+		]
+	},
+	"[G] Subsubsection": {
+		"prefix": "sssec",
+		"body": [
+			"\\subsubsection{${1:$TM_SELECTED_TEXT}}",
+			"",
+			"$0"
+		]
+	},
+	"[G] Text": {
+		"prefix": "txt",
+		"body": [
+			"\\text{${1:$TM_SELECTED_TEXT}}"
+		]
+	},
+	"[G] Minted block": {
+		"prefix": "mintb",
+		"body": [
+			"\\begin{minted}{$1}",
+			"${2:$TM_SELECTED_TEXT}",
+			"\\end{minted}"
+		]
+	},
+	"[G] Minted in-line": {
+		"prefix": "minti",
+		"body": [
+			"\\mintinline{$1}{${2:$TM_SELECTED_TEXT}}"
+		]
+	},
+	"[G] Cancel": {
+		"prefix": "can",
+		"body": [
+			"\\cancel{${1:$TM_SELECTED_TEXT}}"
+		]
+	}
+}

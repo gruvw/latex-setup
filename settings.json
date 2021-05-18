@@ -1,0 +1,102 @@
+{
+    "editor.fontFamily": "Fira Code Medium",
+    "editor.fontLigatures": true,
+    "editor.suggestSelection": "first",
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "vim.vimrc.enable": false,
+    "vim.easymotion": true,
+    "vim.surround": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "k"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.handleKeys": {
+        "<C-c>": false,
+        "<C-v>": false,
+        "<C-y>": false,
+        "<C-z>": false,
+        "<C-x>": false,
+        "<C-a>": false
+    },
+    "latex-utilities.liveReformat.enabled": false,
+    "latex-utilities.message.update.show": false,
+    "latex-utilities.texdef.enabled": false,
+    "latex-utilities.formattedPaste.image.template": [
+        "\\begin{center}",
+        "\t\\includegraphics[width=${1:8}cm]{${2:${imageFileName}}}",
+        "\\end{center}",
+        "$0"
+    ],
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.chktex.run": "onType",
+    "latex-workshop.chktex.delay": 2000,
+    "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.intellisense.package.enabled": true,
+    "latex-workshop.intellisense.unimathsymbols.enabled": true,
+    "latex-workshop.message.update.show": false,
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "-pdf",
+            "--shell-escape",
+            "-outdir=%OUTDIR%",
+            "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "latexmk-clean",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-pdf",
+                "-c",
+                "--shell-escape",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk 🔃",
+            "tools": [
+                "latexmk",
+                "latexmk-clean"
+            ]
+        }
+    ],
+    "cSpell.languageSettings": [
+        {
+            "languageId": "latex",
+            "patterns": [
+                {
+                    "name": "LaTexMinted",
+                    "pattern": "/\\\\begin{minted}[^$]*?\\\\end{minted}/gm",
+                    "description": "Match against all LaTex Minted environments"
+                }
+            ],
+            "ignoreRegExpList": ["LaTexMinted"]
+        }
+    ],
+    "[latex]": {
+        "editor.quickSuggestionsDelay": 0,
+        "editor.wordBasedSuggestions": false,
+        "editor.rulers": [110],
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.wordWrapColumn": 110,
+        "files.trimTrailingWhitespace": false
+    },
+    "[hsnips]": {
+        "files.trimTrailingWhitespace": false
+    }
+}

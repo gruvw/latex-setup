@@ -1,0 +1,308 @@
+snippet texdoc "[G] Document template" w
+\documentclass[12pt, a4paper, openany]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+${1:% LANGUAGE
+\usepackage[english,french]{babel\}
+    \selectlanguage{french\}
+    \frenchsetup{StandardItemLabels=true\}
+\usepackage{enumitem\}  % Enumerate improved
+
+}% MATH / Others
+\usepackage{amsmath, amssymb}  % Math symbols
+\usepackage{esvect, cancel}  % Misc., vectors, strikethrough
+${2:\usepackage{mhchem\}  % Chemistry
+}\usepackage{siunitx}  % Units SI
+${3:\usepackage{minted\}  % Code fences ([cache=false])
+\setminted[python]{
+    fontsize=\footnotesize,
+    tabsize=4,
+    rulecolor=black,
+    xleftmargin=18pt,
+    linenos,
+    breaklines
+\}
+}
+% GEOMETRY
+\usepackage[
+    paper=a4paper,
+    top=2.5cm,
+    left=2.25cm,
+    headheight=15pt,
+    headsep=12pt,
+    textwidth=16cm,
+    textheight=24cm,
+]{geometry}
+\usepackage{parskip}  % Reformat paragraphs, no indent first line
+\usepackage{enumitem}  % Enumerate improved
+\usepackage{scrextend}  % Indent text with addmargin environment
+${4:\usepackage{graphicx\}  % Include graphics
+\graphicspath{{latex-img/\}\}
+\usepackage{caption\}  % Caption without figures
+
+}
+% HYPERLINKS
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linktoc=all,
+    linkcolor=blue,
+}
+
+% HEADERS
+\usepackage{fancyhdr}
+    \pagestyle{fancy}
+    \lhead{$6}
+    \rhead{$7}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \renewcommand{\headrulewidth}{0.4pt}
+\usepackage{etoolbox}  % Define chapter page style
+    \patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{}
+
+% TITLE PAGE
+\title{${6:Title}}
+\author{${7:Author}}
+\date{${8:Date}}
+
+\begin{document}
+% TITLE
+\maketitle
+${5:% TOC
+\pagenumbering{gobble\}{
+    \tableofcontents
+    \thispagestyle{plain\}
+    \cleardoublepage
+\}
+\pagenumbering{arabic\}
+}
+$0
+
+\end{document}
+endsnippet
+
+snippet beg "[G] begin/end" w
+\\begin{$1}
+	$0
+\\end{$1}
+endsnippet
+
+snippet mc "[G] Math centered" w
+\[
+	$1
+\]
+endsnippet
+
+snippet `M([\ pbvBV])(\d)(\d)(.)([bn])` "[G] Matrix" A
+``
+t = m[1] === ' ' ? '' : m[1]
+n = 1
+res = `\\begin{${t}matrix}`
+res += m[5] == "b" ? "\n" : ''
+for (let i = 0; i < m[2]; i++) {
+	for (let j = 0; j < m[3]; j++) {
+		res += `\${${n++}:${m[4]}}`
+		if (j + 1 != m[3]) {
+			res += " & "
+		} else {
+			if (i + 1 != m[2]) {
+				res += "\\\\\\\\"
+			}
+			res += m[5] == "b" ? "\n" : ''
+		}
+	}
+}
+res += `\\end{${t}matrix}`
+rv = res
+``
+endsnippet
+
+snippet `llr([\)\]\>\}vV])` "[G] Left-right" A
+`` trans = {")": ["(", ")"], "]": ["[", "]"], ">": ["<", ">"], "}": ["{", "}"], "v": ["\\lvert", "\\rvert"], "V": ["\\lVert", "\\rVert"]}
+rv = "\\left" + trans[m[1]][0] + " $1 " + "\\right" + trans[m[1]][1] ``
+endsnippet
+
+snippet `(?<![\\a-zA-Z])g([a-zA-Z])\1{1}(?![a-zA-Z])` "[G] Greek letter" A
+`` trans = {"a": "\\alpha", "b": "\\beta", "g": "\\gamma", "G": "\\Gamma", "d": "\\delta", "D": "\\Delta", "e": "\\epsilon", "E": "\\varepsilon", "z": "\\zeta", "h": "\\eta", "t": "\\theta", "T": "\\Theta", "k": "\\kappa", "i": "\\iota", "l": "\\lambda", "L": "\\Lambda", "m": "\\mu", "n": "\\nu", "x": "\\xi", "X": "\\Xi", "p": "\\pi", "P": "\\Pi", "r": "\\rho", "s": "\\sigma", "S": "\\Sigma", "o": "\\omega", "O": "\\Omega", "c": "\\chi", "f": "\\phi", "F": "\\varphi", "y": "\\upsilon", "Y": "\\Upsilon", "v": "\\psi", "V": "\\Psi", "u": "\\tau" }
+rv = (trans[m[1]] || ("g" + m[1] + m[1])) ``
+endsnippet
+
+snippet sum "[G] Sum" w
+\\sum_{${1:i}=${2:1}}^{$3} 
+endsnippet
+
+snippet prod "[G] Product" w
+\\prod_{${1:i}=${2:1}}^{$3} 
+endsnippet
+
+snippet lim "[G] Limit" w
+\\lim\\limits_{${1:x} \\to ${2:\infty}} 
+endsnippet
+
+snippet lima "[G] Arrow limit" w
+\\xrightarrow[${1:x} \\to ${2:\infty}]{} 
+endsnippet
+
+snippet dint "[G] Integral" w
+\\int_{${1:-\\infty}}^{${2:\\infty}} 
+endsnippet
+
+snippet `\b([A-Z])#` "[G] Math bb" A
+``rv = '\\mathbb{' + m[1] + '}'``
+endsnippet
+
+snippet `\\mathbb{([A-Z])}#` "[G] Math cal" A
+``rv = '\\mathcal{' + m[1] + '}'``
+endsnippet
+
+snippet ssb "[G] Subscript" iA
+_{$1}
+endsnippet
+
+snippet `(\B\\[A-Za-z]+|\b[A-Za-z])(\d)` "[G] Auto subscript" A
+``rv = m[1] + "_" + m[2]``
+endsnippet
+
+snippet `(\B\\[A-Za-z]+|\b[A-Za-z])_(\d\d)` "[G] Auto subscript 2" A
+``rv = m[1] + "_{" + m[2]``}
+endsnippet
+
+snippet sq "[G] Square" i
+^2
+endsnippet
+
+snippet cb "[G] Cube" i
+^3
+endsnippet
+
+snippet ppw "[G] Superscripet" iA
+^{$1}
+endsnippet
+
+snippet `((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)\/$|\(((?:\([^()]*\)|[^()])*)\)[^()]*\/$` "[G] Fraction auto" A
+\\frac{`` rv = m[1] || m[9]``}{$1}
+endsnippet
+
+snippet `\((.+)\)rt` "[G] Square root auto" A
+\\sqrt{`` rv = m[1] ``}
+endsnippet
+
+snippet `\\sqrt(?:\[\d\])?\{(.*)\}(\d)` "[G] N root auto / modify N" A
+\\sqrt[`` rv = m[2] ``]{`` rv = m[1] ``}
+endsnippet
+
+snippet xn "[G] x_n" w
+x_{n}
+endsnippet
+
+snippet npp "[G] _{n+1}" wi
+_{n+1}
+endsnippet
+
+snippet nmm "[G] _{n-1}" wi
+_{n-1}
+endsnippet
+
+snippet xi "[G] x_n" w
+x_{i}
+endsnippet
+
+snippet ipp "[G] _{i+1}" wi
+_{i+1}
+endsnippet
+
+snippet imm "[G] _{i-1}" wi
+_{i-1}
+endsnippet
+
+snippet yn "[G] x_n" w
+y_{n}
+endsnippet
+
+snippet yi "[G] x_n" w
+y_{i}
+endsnippet
+
+snippet ... "[G] Ldots" w
+\\ldots
+endsnippet
+
+snippet imp "[G] Implies" w
+\\implies 
+endsnippet
+
+snippet impb "[G] Implied by" w
+\\impliedby 
+endsnippet
+
+snippet iff "[G] Double implies" w
+\\iff 
+endsnippet
+
+snippet ne "[G] Not equal" w
+\\neq 
+endsnippet
+
+snippet ae "[G] Almost equal" w
+\\approx 
+endsnippet
+
+snippet inf "[G] Infinity" w
+\\infty 
+endsnippet
+
+snippet ee "[G] Exists" w
+\\exists 
+endsnippet
+
+snippet fa "[G] For all" w
+\\forall 
+endsnippet
+
+snippet xx "[G] Cross" i
+\\times 
+endsnippet
+
+snippet ti "[G] cdot" i
+\\cdot 
+endsnippet
+
+snippet Lra "[G] Leftrightarrow" w
+\\Leftrightarrow 
+endsnippet
+
+snippet lra "[G] leftrightarrow" w
+\\leftrightarrow 
+endsnippet
+
+snippet qq "[G] Quad" w
+\\quad 
+endsnippet
+
+snippet sm "[G] Setminus" w
+\\setminus 
+endsnippet
+
+snippet set "[G] Set" w
+\\{$1\\}
+endsnippet
+
+snippet disp "[G] Displaystyle" w
+\\displaystyle 
+endsnippet
+
+snippet dx "[G] Dx" w
+\\,dx
+endsnippet
+
+snippet dz "[G] Dz" w
+\\,dz
+endsnippet
+
+snippet dt "[G] Dt" w
+\\,dt
+endsnippet
+
+snippet sub "[G] Subset" w
+\\subset 
+endsnippet
