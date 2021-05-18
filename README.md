@@ -41,6 +41,8 @@ I don't think any of them needs extra explanation.
 
 You will find my **HyperSnips snippets** in the `latex.hsnips` file.
 
+Most of them will only trigger while typing inside a math context.
+
 I explain some of them as there are some complex ones. It should help you to understand their definitions.
 
 Example format: `expression`: `replaced by`
@@ -79,7 +81,7 @@ Example: `Mp241b` will result in the following
 Used to generate `\left \right` commands.
 
 How to activate:
-1. Must start with `llr`
+1. Must start with `lr`
 2. The next character can be one of the following: `)`, `]`, `>`, `}`, `v`, `V`
 
 See `latex.hsnips` file for definitions.

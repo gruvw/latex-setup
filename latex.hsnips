@@ -1,3 +1,16 @@
+global
+function math(context) {
+    return context.scopes.some(s => s.startsWith("meta.math"));
+}
+endglobal
+
+global
+function text(context) {
+    return !context.scopes.some(s => s.startsWith("meta.math") || s.startsWith("meta.embedded") || s.startsWith("source"));
+}
+endglobal
+
+context text(context)
 snippet texdoc "[G] Document template" w
 \documentclass[12pt, a4paper, openany]{report}
 \usepackage[utf8]{inputenc}
@@ -93,6 +106,7 @@ snippet mc "[G] Math centered" w
 \]
 endsnippet
 
+context math(context)
 snippet `M([\ pbvBV])(\d)(\d)(.)([bn])` "[G] Matrix" A
 ``
 t = m[1] === ' ' ? '' : m[1]
@@ -117,192 +131,239 @@ rv = res
 ``
 endsnippet
 
-snippet `llr([\)\]\>\}vV])` "[G] Left-right" A
+context math(context)
+snippet `lr([\)\]\>\}vV])` "[G] Left-right" A
 `` trans = {")": ["(", ")"], "]": ["[", "]"], ">": ["<", ">"], "}": ["{", "}"], "v": ["\\lvert", "\\rvert"], "V": ["\\lVert", "\\rVert"]}
 rv = "\\left" + trans[m[1]][0] + " $1 " + "\\right" + trans[m[1]][1] ``
 endsnippet
 
+context math(context)
 snippet `(?<![\\a-zA-Z])g([a-zA-Z])\1{1}(?![a-zA-Z])` "[G] Greek letter" A
 `` trans = {"a": "\\alpha", "b": "\\beta", "g": "\\gamma", "G": "\\Gamma", "d": "\\delta", "D": "\\Delta", "e": "\\epsilon", "E": "\\varepsilon", "z": "\\zeta", "h": "\\eta", "t": "\\theta", "T": "\\Theta", "k": "\\kappa", "i": "\\iota", "l": "\\lambda", "L": "\\Lambda", "m": "\\mu", "n": "\\nu", "x": "\\xi", "X": "\\Xi", "p": "\\pi", "P": "\\Pi", "r": "\\rho", "s": "\\sigma", "S": "\\Sigma", "o": "\\omega", "O": "\\Omega", "c": "\\chi", "f": "\\phi", "F": "\\varphi", "y": "\\upsilon", "Y": "\\Upsilon", "v": "\\psi", "V": "\\Psi", "u": "\\tau" }
 rv = (trans[m[1]] || ("g" + m[1] + m[1])) ``
 endsnippet
 
-snippet sum "[G] Sum" w
+context math(context)
+snippet ssm "[G] Sum" wA
 \\sum_{${1:i}=${2:1}}^{$3} 
 endsnippet
 
-snippet prod "[G] Product" w
+context math(context)
+snippet ppr "[G] Product" wA
 \\prod_{${1:i}=${2:1}}^{$3} 
 endsnippet
 
-snippet lim "[G] Limit" w
+context math(context)
+snippet lli "[G] Limit" wA
 \\lim\\limits_{${1:x} \\to ${2:\infty}} 
 endsnippet
 
-snippet lima "[G] Arrow limit" w
+context math(context)
+snippet alli "[G] Arrow limit" wA
 \\xrightarrow[${1:x} \\to ${2:\infty}]{} 
 endsnippet
 
-snippet dint "[G] Integral" w
+context math(context)
+snippet dint "[G] Integral" wA
 \\int_{${1:-\\infty}}^{${2:\\infty}} 
 endsnippet
 
+context math(context)
 snippet `\b([A-Z])#` "[G] Math bb" A
 ``rv = '\\mathbb{' + m[1] + '}'``
 endsnippet
 
-snippet `\\mathbb{([A-Z])}#` "[G] Math cal" A
+context math(context)
+snippet `\\mathbb{([A-Z])}#` "[G] Math cal (F##)" A
 ``rv = '\\mathcal{' + m[1] + '}'``
 endsnippet
 
-snippet ssb "[G] Subscript" iA
+context math(context)
+snippet __ "[G] Subscript" iA
 _{$1}
 endsnippet
 
+context math(context)
 snippet `(\B\\[A-Za-z]+|\b[A-Za-z])(\d)` "[G] Auto subscript" A
 ``rv = m[1] + "_" + m[2]``
 endsnippet
 
+context math(context)
 snippet `(\B\\[A-Za-z]+|\b[A-Za-z])_(\d\d)` "[G] Auto subscript 2" A
 ``rv = m[1] + "_{" + m[2]``}
 endsnippet
 
-snippet sq "[G] Square" i
+context math(context)
+snippet uu "[G] Square" iA
 ^2
 endsnippet
 
-snippet cb "[G] Cube" i
+context math(context)
+snippet cc "[G] Cube" iA
 ^3
 endsnippet
 
-snippet ppw "[G] Superscripet" iA
+context math(context)
+snippet -- "[G] Superscripet" iA
 ^{$1}
 endsnippet
 
+context math(context)
 snippet `((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)\/$|\(((?:\([^()]*\)|[^()])*)\)[^()]*\/$` "[G] Fraction auto" A
 \\frac{`` rv = m[1] || m[9]``}{$1}
 endsnippet
 
+context math(context)
 snippet `\((.+)\)rt` "[G] Square root auto" A
 \\sqrt{`` rv = m[1] ``}
 endsnippet
 
+context math(context)
 snippet `\\sqrt(?:\[\d\])?\{(.*)\}(\d)` "[G] N root auto / modify N" A
 \\sqrt[`` rv = m[2] ``]{`` rv = m[1] ``}
 endsnippet
 
-snippet xn "[G] x_n" w
-x_{n}
+context math(context)
+snippet xn "[G] x_n" wA
+x_n
 endsnippet
 
-snippet npp "[G] _{n+1}" wi
+context math(context)
+snippet npp "[G] _{n+1}" iA
 _{n+1}
 endsnippet
 
-snippet nmm "[G] _{n-1}" wi
+context math(context)
+snippet nmm "[G] _{n-1}" iA
 _{n-1}
 endsnippet
 
-snippet xi "[G] x_n" w
-x_{i}
+context math(context)
+snippet xi "[G] x_i" wA
+x_i
 endsnippet
 
-snippet ipp "[G] _{i+1}" wi
+context math(context)
+snippet ipp "[G] _{i+1}" iA
 _{i+1}
 endsnippet
 
-snippet imm "[G] _{i-1}" wi
+context math(context)
+snippet imm "[G] _{i-1}" iA
 _{i-1}
 endsnippet
 
-snippet yn "[G] x_n" w
-y_{n}
+context math(context)
+snippet yn "[G] y_n" wA
+y_n
 endsnippet
 
-snippet yi "[G] x_n" w
-y_{i}
+context math(context)
+snippet yi "[G] y_i" wA
+y_i
 endsnippet
 
-snippet ... "[G] Ldots" w
+context math(context)
+snippet ... "[G] Ldots" wA
 \\ldots
 endsnippet
 
-snippet imp "[G] Implies" w
+context math(context)
+snippet iim "[G] Implies" wA
 \\implies 
 endsnippet
 
-snippet impb "[G] Implied by" w
+context math(context)
+snippet iimb "[G] Implied by" wA
 \\impliedby 
 endsnippet
 
-snippet iff "[G] Double implies" w
+context math(context)
+snippet iff "[G] Double implies" wA
 \\iff 
 endsnippet
 
-snippet ne "[G] Not equal" w
+context math(context)
+snippet nne "[G] Not equal" wA
 \\neq 
 endsnippet
 
-snippet ae "[G] Almost equal" w
+context math(context)
+snippet aap "[G] Almost equal" wA
 \\approx 
 endsnippet
 
-snippet inf "[G] Infinity" w
+context math(context)
+snippet iin "[G] Infinity" wA
 \\infty 
 endsnippet
 
-snippet ee "[G] Exists" w
+context math(context)
+snippet ee "[G] Exists" wA
 \\exists 
 endsnippet
 
-snippet fa "[G] For all" w
+context math(context)
+snippet ffa "[G] For all" wA
 \\forall 
 endsnippet
 
-snippet xx "[G] Cross" i
+context math(context)
+snippet xx "[G] Cross" iA
 \\times 
 endsnippet
 
-snippet ti "[G] cdot" i
+context math(context)
+snippet cd "[G] cdot" iA
 \\cdot 
 endsnippet
 
-snippet Lra "[G] Leftrightarrow" w
+context math(context)
+snippet Lra "[G] Leftrightarrow" wA
 \\Leftrightarrow 
 endsnippet
 
-snippet lra "[G] leftrightarrow" w
+context math(context)
+snippet lra "[G] leftrightarrow" wA
 \\leftrightarrow 
 endsnippet
 
-snippet qq "[G] Quad" w
+context math(context)
+snippet qq "[G] Quad" wA
 \\quad 
 endsnippet
 
-snippet sm "[G] Setminus" w
+context math(context)
+snippet stm "[G] Setminus" w
 \\setminus 
 endsnippet
 
-snippet set "[G] Set" w
+context math(context)
+snippet sst "[G] Set" wA
 \\{$1\\}
 endsnippet
 
-snippet disp "[G] Displaystyle" w
+context math(context)
+snippet dspt "[G] Displaystyle" wA
 \\displaystyle 
 endsnippet
 
-snippet dx "[G] Dx" w
+context math(context)
+snippet ddx "[G] Dx" wA
 \\,dx
 endsnippet
 
-snippet dz "[G] Dz" w
+context math(context)
+snippet ddz "[G] Dz" wA
 \\,dz
 endsnippet
 
-snippet dt "[G] Dt" w
+context math(context)
+snippet ddt "[G] Dt" wA
 \\,dt
 endsnippet
 
-snippet sub "[G] Subset" w
+context math(context)
+snippet ssb "[G] Subset" wA
 \\subset 
 endsnippet
