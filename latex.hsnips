@@ -179,6 +179,11 @@ snippet `\\mathbb{([A-Z])}#` "[G] Math cal (F##)" A
 endsnippet
 
 context math(context)
+snippet mrm "[G] Math rm" A
+\\mathrm{$1}
+endsnippet
+
+context math(context)
 snippet __ "[G] Subscript" iA
 _{$1}
 endsnippet
@@ -295,7 +300,7 @@ endsnippet
 
 context math(context)
 snippet iin "[G] Infinity" wA
-\\infty 
+\\infty
 endsnippet
 
 context math(context)

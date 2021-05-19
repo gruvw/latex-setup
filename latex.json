@@ -65,12 +65,6 @@
 			"\\overbrace{${1:$TM_SELECTED_TEXT}}_{$2}"
 		]
 	},
-	"Mathrm": {
-		"prefix": "mrm",
-		"body": [
-			"\\mathrm{${1:$TM_SELECTED_TEXT}}"
-		]
-	},
 	"[G] Bold": {
 		"prefix": "bld",
 		"body": [
