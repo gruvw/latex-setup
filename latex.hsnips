@@ -1,3 +1,128 @@
+################
+#  CheatSheet  #
+################
+# `_`: snippet argument, T: trigger key needed
+
+# Environments:
+# beg T-> begin end
+# mc T-> \[ \]
+# mi T-> \( \)
+# M`p211n` -> (1\\ 1)
+# lr`)` -> \left( \right)
+# sst -> \{ \}
+# dsp -> \displaystyle
+# ali T-> begin aligned
+# gat T-> begin gathered
+# cas T-> begin cases
+# enm T-> begin enumerate
+# itz T-> begin itemize
+# adm T-> begin addmargin[1em][0em]
+# mindb T-> begin minted{}
+# minti T-> \mintinline{}{}
+
+# Arguments:
+# ssm -> \sum_{i=1}^{}
+# ppr -> \prod_{i=1}^{}
+# lli -> \lim_{x \to \infty}
+# alli -> \xrightarrow[x \to \infty]
+# dint -> \int_{-\infty}^{\infty}
+# ff -> \frac{}{}
+# sqt -> \sqrt{}
+# vv -> \vv{}
+# ce T-> \ce{}
+# mrm -> \mathrm{}
+# unbc -> \underbrace{}_{}
+# ovbc -> \overbrace{}_{}
+# can T-> \cancel{}
+# txt T-> \text{}
+# chp T-> \chapter{}
+# sec T-> \section{}
+# ssec T-> \subsection{}
+# sssec T-> \subsubsection{}
+
+# Commands:
+# iim -> \implies
+# iimb -> \impliedby
+# iff -> \iff
+# ge -> \ge
+# le -> \le
+# app -> \approx 
+# ne -> \neq
+# sim -> \sim
+# iin -> \infty
+# ee -> \exists
+# fa -> \forall
+# xx -> \times
+# cd -> \cdot
+# stm -> \setminus
+# ssb -> \subset
+# lra -> \leftrightarrow 
+# Lra -> \Leftrightarrow 
+# qq -> \quad
+# ... -> \ldots
+# g`aa` -> \alpha
+# sin -> \sin 
+# asin -> \arcsin 
+# cos -> \cos 
+# acos -> \arccos 
+# tan -> \tan 
+# atan -> \arctan 
+# cot -> \cot
+# sec -> \sec
+# ln -> \ln
+# log -> \log
+# max -> \max
+# min -> \min
+# deg -> \deg
+# arg -> \arg
+# perp -> \perp
+# dim -> \dim
+# det -> \det
+# in -> \in
+# cup -> \cup
+# cap -> \cap
+# pm -> \pm
+# mp -> \mp
+# Im -> \Im
+# Re -> \Re
+# bar -> \bar
+# dot -> \dot
+# hat -> \hat
+
+# Auto:
+# `x1` -> x_1
+# `x11` -> x_{11}
+# `1`/`2` -> \frac{1}{2}
+# `3gppsq`/ -> \frac{3\pi^2}{}
+# (`xsq - 7gaa`)/ -> \frac{x^2 - 7\alpha}{}
+# (`3x - y`)rt -> \sqrt{(3x -y)}
+# (`3x - y`)rt3 -> \sqrt[3]{(3x -y)}
+
+# Subscript / Superscript
+# __ -> _{}
+# -- -> ^{}
+# sq -> ^2
+# cb -> ^3
+# xn -> x_n
+# xi -> x_i
+# yn -> y_n
+# yi -> y_i
+# p1n -> _{n+1}
+# m1n -> _{n-1}
+# p1i -> _{i+1}
+# m1i -> _{i-1}
+
+# Miscellaneous:
+# texdoc T-> new document template
+# bld T-> \textbf{}
+# itl T-> \textit{}
+# `A`# -> \mathbb{A}
+# `A`## -> \mathcal{A}
+# ddx -> \\,dx
+# ddz -> \\,dz
+# ddt -> \\,dt
+
+
 global
 function math(context) {
     return context.scopes.some(s => s.startsWith("meta.math"));
@@ -199,12 +324,12 @@ snippet `(\B\\[A-Za-z]+|\b[A-Za-z])_(\d\d)` "[G] Auto subscript 2" A
 endsnippet
 
 context math(context)
-snippet uu "[G] Square" iA
+snippet sq "[G] Square" iA
 ^2
 endsnippet
 
 context math(context)
-snippet cc "[G] Cube" iA
+snippet cb "[G] Cube" iA
 ^3
 endsnippet
 
@@ -214,12 +339,17 @@ snippet -- "[G] Superscripet" iA
 endsnippet
 
 context math(context)
-snippet `((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)\/$|\(((?:\([^()]*\)|[^()])*)\)[^()]*\/$` "[G] Fraction auto" A
-\\frac{`` rv = m[1] || m[9]``}{$1}
+snippet `((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)\/$|(\(((?:\([^()]*\)|[^()])*)\))\/$` "[G] Fraction auto" A
+\\frac{`` rv = m[1] || m[10]``}{$1}
 endsnippet
 
 context math(context)
-snippet `\((.+)\)rt` "[G] Square root auto" A
+snippet ff "[G] Fraction" wA
+\\frac{$1}{$2}
+endsnippet
+
+context math(context)
+snippet `(\(((?:\([^()]*\)|[^()])*)\))rt` "[G] Square root auto" A
 \\sqrt{`` rv = m[1] ``}
 endsnippet
 
@@ -229,18 +359,23 @@ snippet `\\sqrt(?:\[\d\])?\{(.*)\}(\d)` "[G] N root auto / modify N" A
 endsnippet
 
 context math(context)
+snippet sqt "[G] Square root"
+\\sqrt{$1}
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)(deg|arg|sin|cos|tan|cot|sec|perp|ln|log|max|min|dim|det|in|cup|cap|ge|le|sim|pm|mp|Im|Re|bar|dot|hat|iff)` "[G] Commands" A
+`` rv = "\\" + m[1] + " " ``
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)a(sin|cos|tan)` "[G] Arc-trigo" A
+`` rv = "\\arc" + m[1] + " " ``
+endsnippet
+
+context math(context)
 snippet xn "[G] x_n" wA
 x_n
-endsnippet
-
-context math(context)
-snippet npp "[G] _{n+1}" iA
-_{n+1}
-endsnippet
-
-context math(context)
-snippet nmm "[G] _{n-1}" iA
-_{n-1}
 endsnippet
 
 context math(context)
@@ -249,12 +384,22 @@ x_i
 endsnippet
 
 context math(context)
-snippet ipp "[G] _{i+1}" iA
+snippet p1n "[G] _{n+1}" iA
+_{n+1}
+endsnippet
+
+context math(context)
+snippet m1n "[G] _{n-1}" iA
+_{n-1}
+endsnippet
+
+context math(context)
+snippet p1i "[G] _{i+1}" iA
 _{i+1}
 endsnippet
 
 context math(context)
-snippet imm "[G] _{i-1}" iA
+snippet m1i "[G] _{i-1}" iA
 _{i-1}
 endsnippet
 
@@ -284,17 +429,12 @@ snippet iimb "[G] Implied by" wA
 endsnippet
 
 context math(context)
-snippet iff "[G] Double implies" wA
-\\iff 
-endsnippet
-
-context math(context)
-snippet nne "[G] Not equal" wA
+snippet ne "[G] Not equal" wA
 \\neq 
 endsnippet
 
 context math(context)
-snippet aap "[G] Almost equal" wA
+snippet app "[G] Almost equal" wA
 \\approx 
 endsnippet
 
@@ -309,7 +449,7 @@ snippet ee "[G] Exists" wA
 endsnippet
 
 context math(context)
-snippet ffa "[G] For all" wA
+snippet fa "[G] For all" wA
 \\forall 
 endsnippet
 
@@ -349,7 +489,7 @@ snippet sst "[G] Set" wA
 endsnippet
 
 context math(context)
-snippet dspt "[G] Displaystyle" wA
+snippet dsp "[G] Displaystyle" wA
 \\displaystyle 
 endsnippet
 
@@ -371,4 +511,9 @@ endsnippet
 context math(context)
 snippet ssb "[G] Subset" wA
 \\subset 
+endsnippet
+
+context math(context)
+snippet vv "[G] Vector" wA
+\\vv{$1}
 endsnippet

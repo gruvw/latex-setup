@@ -8,7 +8,7 @@
 		]
 	},
 	"[G] Gathered": {
-		"prefix": "gath",
+		"prefix": "gat",
 		"body": [
 			"\\begin{gathered}",
 			"\t${1:$TM_SELECTED_TEXT}",
@@ -40,7 +40,7 @@
 		]
 	},
 	"[G] Add margin": {
-		"prefix": "admg",
+		"prefix": "adm",
 		"body": [
 			"\\begin{addmargin}[${1:1em}]{${2:0em}}",
 			"\t${3:$TM_SELECTED_TEXT}",
@@ -75,42 +75,6 @@
 		"prefix": "itl",
 		"body": [
 			"\\textit{${1:$TM_SELECTED_TEXT}}"
-		]
-	},
-	"[G] Square root": {
-		"prefix": "sqt",
-		"body": [
-			"\\sqrt{${1:$TM_SELECTED_TEXT}}"
-		]
-	},
-	"[G] Fraction": {
-		"prefix": "ff",
-		"body": [
-			"\\frac{${1:$TM_SELECTED_TEXT}}{$2}"
-		]
-	},
-	"[G] Vector": {
-		"prefix": "vv",
-		"body": [
-			"\\vv{${1:$TM_SELECTED_TEXT}}"
-		]
-	},
-	"[G] Bar": {
-		"prefix": "bar",
-		"body": [
-			"\\overline{${1:$TM_SELECTED_TEXT}}"
-		]
-	},
-	"[G] Hat": {
-		"prefix": "hat",
-		"body": [
-			"\\hat{${1:$TM_SELECTED_TEXT}}"
-		]
-	},
-	"[G] Dot": {
-		"prefix": "dot",
-		"body": [
-			"\\dot{${1:$TM_SELECTED_TEXT}}"
 		]
 	},
 	"[G] Chemistry equation": {

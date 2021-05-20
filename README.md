@@ -28,6 +28,8 @@ I use two types of snippets: VSCode default snippets and the HyperSnips extensio
 
 Every snippet name starts with `[G]` in order to differentiate them from regular snippets (from LaTeX Workshop for example).
 
+You will find a CheatSheet on top of the `latex.hsnips` file 😉.
+
 If you want to add or modify a snippet, feel free to open an issue or a pull request.  
 If you don't understand a snippet feel free to open an issue or send me a message.
 
