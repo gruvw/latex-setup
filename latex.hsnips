@@ -17,8 +17,8 @@
 # enm T-> begin enumerate
 # itz T-> begin itemize
 # adm T-> begin addmargin[1em][0em]
-# mindb T-> begin minted{}
-# minti T-> \mintinline{}{}
+# mitb T-> begin minted{}
+# miti T-> \mintinline{}{}
 
 # Arguments:
 # ssm -> \sum_{i=1}^{}
@@ -27,12 +27,12 @@
 # alli -> \xrightarrow[x \to \infty]
 # dint -> \int_{-\infty}^{\infty}
 # ff -> \frac{}{}
-# sqt -> \sqrt{}
+# srt -> \sqrt{}
 # vv -> \vv{}
 # ce T-> \ce{}
 # mrm -> \mathrm{}
-# unbc -> \underbrace{}_{}
-# ovbc -> \overbrace{}_{}
+# unbc T-> \underbrace{}_{}
+# ovbc T-> \overbrace{}_{}
 # can T-> \cancel{}
 # txt T-> \text{}
 # chp T-> \chapter{}
@@ -42,7 +42,7 @@
 
 # Commands:
 # iim -> \implies
-# iimb -> \impliedby
+# iib -> \impliedby
 # iff -> \iff
 # ge -> \ge
 # le -> \le
@@ -59,8 +59,8 @@
 # lra -> \leftrightarrow 
 # Lra -> \Leftrightarrow 
 # qq -> \quad
-# ... -> \ldots
-# g`aa` -> \alpha
+# .. -> \ldots
+# G`aa` -> \alpha
 # sin -> \sin 
 # asin -> \arcsin 
 # cos -> \cos 
@@ -68,7 +68,6 @@
 # tan -> \tan 
 # atan -> \arctan 
 # cot -> \cot
-# sec -> \sec
 # ln -> \ln
 # log -> \log
 # max -> \max
@@ -93,8 +92,8 @@
 # `x1` -> x_1
 # `x11` -> x_{11}
 # `1`/`2` -> \frac{1}{2}
-# `3gppsq`/ -> \frac{3\pi^2}{}
-# (`xsq - 7gaa`)/ -> \frac{x^2 - 7\alpha}{}
+# `3Gppsq`/ -> \frac{3\pi^2}{}
+# (`xsq - 7Gaa`)/ -> \frac{x^2 - 7\alpha}{}
 # (`3x - y`)rt -> \sqrt{(3x -y)}
 # (`3x - y`)rt3 -> \sqrt[3]{(3x -y)}
 
@@ -107,10 +106,10 @@
 # xi -> x_i
 # yn -> y_n
 # yi -> y_i
-# p1n -> _{n+1}
-# m1n -> _{n-1}
-# p1i -> _{i+1}
-# m1i -> _{i-1}
+# np`1` -> _{n+1}
+# nm`1` -> _{n-1}
+# ip`1` -> _{i+1}
+# im`1` -> _{i-1}
 
 # Miscellaneous:
 # texdoc T-> new document template
@@ -263,9 +262,9 @@ rv = "\\left" + trans[m[1]][0] + " $1 " + "\\right" + trans[m[1]][1] ``
 endsnippet
 
 context math(context)
-snippet `(?<![\\a-zA-Z])g([a-zA-Z])\1{1}(?![a-zA-Z])` "[G] Greek letter" A
+snippet `(?<![\\a-zA-Z])G([a-zA-Z])\1{1}(?![a-zA-Z])` "[G] Greek letter" A
 `` trans = {"a": "\\alpha", "b": "\\beta", "g": "\\gamma", "G": "\\Gamma", "d": "\\delta", "D": "\\Delta", "e": "\\epsilon", "E": "\\varepsilon", "z": "\\zeta", "h": "\\eta", "t": "\\theta", "T": "\\Theta", "k": "\\kappa", "i": "\\iota", "l": "\\lambda", "L": "\\Lambda", "m": "\\mu", "n": "\\nu", "x": "\\xi", "X": "\\Xi", "p": "\\pi", "P": "\\Pi", "r": "\\rho", "s": "\\sigma", "S": "\\Sigma", "o": "\\omega", "O": "\\Omega", "c": "\\chi", "f": "\\phi", "F": "\\varphi", "y": "\\upsilon", "Y": "\\Upsilon", "v": "\\psi", "V": "\\Psi", "u": "\\tau" }
-rv = (trans[m[1]] || ("g" + m[1] + m[1])) ``
+rv = (trans[m[1]] || ("G" + m[1] + m[1])) ``
 endsnippet
 
 context math(context)
@@ -359,12 +358,12 @@ snippet `\\sqrt(?:\[\d\])?\{(.*)\}(\d)` "[G] N root auto / modify N" A
 endsnippet
 
 context math(context)
-snippet sqt "[G] Square root"
+snippet srt "[G] Square root" A
 \\sqrt{$1}
 endsnippet
 
 context math(context)
-snippet `\b(?<!\\)(deg|arg|sin|cos|tan|cot|sec|perp|ln|log|max|min|dim|det|in|cup|cap|ge|le|sim|pm|mp|Im|Re|bar|dot|hat|iff)` "[G] Commands" A
+snippet `\b(?<!\\)(deg|arg|sin|cos|tan|cot|perp|ln|log|max|min|dim|det|in|cup|cap|ge|le|sim|pm|mp|Im|Re|bar|dot|hat|iff)` "[G] Commands" A
 `` rv = "\\" + m[1] + " " ``
 endsnippet
 
@@ -384,23 +383,23 @@ x_i
 endsnippet
 
 context math(context)
-snippet p1n "[G] _{n+1}" iA
-_{n+1}
+snippet `np(\d)` "[G] _{n+d}" A
+`` rv = `_{n+${m[1]}}` ``
 endsnippet
 
 context math(context)
-snippet m1n "[G] _{n-1}" iA
-_{n-1}
+snippet `nm(\d)` "[G] _{n-d}" iA
+`` rv = `_{n-${m[1]}}` ``
 endsnippet
 
 context math(context)
-snippet p1i "[G] _{i+1}" iA
-_{i+1}
+snippet `ip(\d)` "[G] _{i+d}" iA
+`` rv = `_{i+${m[1]}}` ``
 endsnippet
 
 context math(context)
-snippet m1i "[G] _{i-1}" iA
-_{i-1}
+snippet `im(\d)` "[G] _{i-d}" iA
+`` rv = `_{i-${m[1]}}` ``
 endsnippet
 
 context math(context)
@@ -414,17 +413,17 @@ y_i
 endsnippet
 
 context math(context)
-snippet ... "[G] Ldots" wA
+snippet .. "[G] Ldots" A
 \\ldots
 endsnippet
 
 context math(context)
-snippet iim "[G] Implies" wA
+snippet iim "[G] Implies" A
 \\implies 
 endsnippet
 
 context math(context)
-snippet iimb "[G] Implied by" wA
+snippet iib "[G] Implied by" wA
 \\impliedby 
 endsnippet
 
@@ -479,7 +478,7 @@ snippet qq "[G] Quad" wA
 endsnippet
 
 context math(context)
-snippet stm "[G] Setminus" w
+snippet stm "[G] Setminus" A
 \\setminus 
 endsnippet
 

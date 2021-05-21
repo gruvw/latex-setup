@@ -122,7 +122,7 @@
 		]
 	},
 	"[G] Minted block": {
-		"prefix": "mintb",
+		"prefix": "mitb",
 		"body": [
 			"\\begin{minted}{$1}",
 			"${2:$TM_SELECTED_TEXT}",
@@ -130,7 +130,7 @@
 		]
 	},
 	"[G] Minted in-line": {
-		"prefix": "minti",
+		"prefix": "miti",
 		"body": [
 			"\\mintinline{$1}{${2:$TM_SELECTED_TEXT}}"
 		]

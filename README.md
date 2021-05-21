@@ -93,12 +93,12 @@ See `latex.hsnips` file for definitions.
 Used to input Greek letters faster.
 
 How to activate:
-1. Must start with `g`
+1. Must start with `G`
 2. The next character must be typed twice
 
 Examples:
-- `gaa`: `\alpha`
-- `gdd`: `\delta`
+- `Gaa`: `\alpha`
+- `GDD`: `\Delta`
 
 See `latex.hsnips` file for the other associations.
 
@@ -116,14 +116,19 @@ Examples:
 - `\mathbb{F}#`: `\mathcal{F}`
 - `F##`: `\mathcal{F}`
 
-#### [G] Auto subscript
+#### Auto subscript
 
 If you type a one or two digit(s) number directly after a letter or a command, it will be automatically subscripted.
 
 Examples:
 - `a1`: `a_1`
 - `x34`: `x_{34}`
-- `gaa2`: `\alpha_2` (see Greek letter)
+- `Gaa2`: `\alpha_2` (see Greek letter)
+
+Special subscripts for `n/i + d` or `n/i - d`:
+- `np1`: `_{n+1}`
+- `nm2`: `_{n-2}`
+- `ip3`: `_{i+3}`
 
 #### Fraction auto
 
