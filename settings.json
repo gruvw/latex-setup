@@ -31,12 +31,14 @@
         "$0"
     ],
     "latex-workshop.view.pdf.viewer": "tab",
-    "latex-workshop.chktex.run": "onType",
+    "latex-workshop.chktex.run": "onSave",
     "latex-workshop.chktex.delay": 2000,
     "latex-workshop.latex.autoBuild.run": "never",
     "latex-workshop.intellisense.package.enabled": true,
     "latex-workshop.intellisense.unimathsymbols.enabled": true,
     "latex-workshop.message.update.show": false,
+    "latex-workshop.mathpreviewpanel.editorGroup": "above",
+    "latex-workshop.synctex.afterBuild.enabled": true,
     "latex-workshop.latex.tools": [
         {
             "name": "latexmk",

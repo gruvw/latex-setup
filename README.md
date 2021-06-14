@@ -93,12 +93,12 @@ See `latex.hsnips` file for definitions.
 Used to input Greek letters faster.
 
 How to activate:
-1. Must start with `G`
-2. The next character must be typed twice
+1. Must start with `z`
+2. The next character must correspond to the greek letter
 
 Examples:
-- `Gaa`: `\alpha`
-- `GDD`: `\Delta`
+- `za`: `\alpha`
+- `zD`: `\Delta`
 
 See `latex.hsnips` file for the other associations.
 
@@ -123,7 +123,7 @@ If you type a one or two digit(s) number directly after a letter or a command, i
 Examples:
 - `a1`: `a_1`
 - `x34`: `x_{34}`
-- `Gaa2`: `\alpha_2` (see Greek letter)
+- `za2`: `\alpha_2` (see Greek letter)
 
 Special subscripts for `n/i + d` or `n/i - d`:
 - `np1`: `_{n+1}`

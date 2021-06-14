@@ -29,6 +29,11 @@
 # ff -> \frac{}{}
 # srt -> \sqrt{}
 # vv -> \vv{}
+# nrm -> \norm{}
+# abs -> \abs{}
+# bar -> \bar{}
+# dot -> \dot{}
+# hat -> \hat{}
 # ce T-> \ce{}
 # mrm -> \mathrm{}
 # unbc T-> \underbrace{}_{}
@@ -56,17 +61,19 @@
 # cd -> \cdot
 # stm -> \setminus
 # ssb -> \subset
+# to -> \to
+# mpt -> \mapsto 
 # lra -> \leftrightarrow 
 # Lra -> \Leftrightarrow 
 # qq -> \quad
 # .. -> \ldots
-# G`aa` -> \alpha
-# sin -> \sin 
-# asin -> \arcsin 
-# cos -> \cos 
-# acos -> \arccos 
-# tan -> \tan 
-# atan -> \arctan 
+# z`a` -> \alpha
+# sin -> \sin
+# asin -> \arcsin
+# cos -> \cos
+# acos -> \arccos
+# tan -> \tan
+# atan -> \arctan
 # cot -> \cot
 # ln -> \ln
 # log -> \log
@@ -76,26 +83,25 @@
 # arg -> \arg
 # perp -> \perp
 # dim -> \dim
+# ker -> \ker
 # det -> \det
 # in -> \in
 # cup -> \cup
 # cap -> \cap
+# mid -> \mid
 # pm -> \pm
-# mp -> \mp
 # Im -> \Im
 # Re -> \Re
-# bar -> \bar
-# dot -> \dot
-# hat -> \hat
+# exp -> \exp
 
 # Auto:
 # `x1` -> x_1
 # `x11` -> x_{11}
 # `1`/`2` -> \frac{1}{2}
-# `3Gppsq`/ -> \frac{3\pi^2}{}
-# (`xsq - 7Gaa`)/ -> \frac{x^2 - 7\alpha}{}
-# (`3x - y`)rt -> \sqrt{(3x -y)}
-# (`3x - y`)rt3 -> \sqrt[3]{(3x -y)}
+# `3zpsq`/ -> \frac{3\pi^2}{}
+# (`xsq - 7za`)/ -> \frac{x^2 - 7\alpha}{}
+# (`3x - y`)rt -> \sqrt{3x -y}
+# (`3x - y`)rt3 -> \sqrt[3]{3x -y}
 
 # Subscript / Superscript
 # __ -> _{}
@@ -110,6 +116,8 @@
 # nm`1` -> _{n-1}
 # ip`1` -> _{i+1}
 # im`1` -> _{i-1}
+# xip`2` -> x_{i+2}
+# `R`#`+*` -> \mathbb{R}_+^*
 
 # Miscellaneous:
 # texdoc T-> new document template
@@ -117,14 +125,12 @@
 # itl T-> \textit{}
 # `A`# -> \mathbb{A}
 # `A`## -> \mathcal{A}
-# ddx -> \\,dx
-# ddz -> \\,dz
-# ddt -> \\,dt
+# dd`x` -> \\,dx
 
 
 global
 function math(context) {
-    return context.scopes.some(s => s.startsWith("meta.math"));
+    return context.scopes.some(s => s.startsWith("meta.math")) && !context.scopes.some(s => s.startsWith("comment"));
 }
 endglobal
 
@@ -148,6 +154,7 @@ ${1:% LANGUAGE
 
 }% MATH / Others
 \usepackage{amsmath, amssymb}  % Math symbols
+\usepackage{physics}  % \norm and \abs
 \usepackage{esvect, cancel}  % Misc., vectors, strikethrough
 ${2:\usepackage{mhchem\}  % Chemistry
 }\usepackage{siunitx}  % Units SI
@@ -262,9 +269,9 @@ rv = "\\left" + trans[m[1]][0] + " $1 " + "\\right" + trans[m[1]][1] ``
 endsnippet
 
 context math(context)
-snippet `(?<![\\a-zA-Z])G([a-zA-Z])\1{1}(?![a-zA-Z])` "[G] Greek letter" A
+snippet `(?<![\\a-zA-Z])z([a-zA-Z])(?![a-zA-Z])` "[G] Greek letter" A
 `` trans = {"a": "\\alpha", "b": "\\beta", "g": "\\gamma", "G": "\\Gamma", "d": "\\delta", "D": "\\Delta", "e": "\\epsilon", "E": "\\varepsilon", "z": "\\zeta", "h": "\\eta", "t": "\\theta", "T": "\\Theta", "k": "\\kappa", "i": "\\iota", "l": "\\lambda", "L": "\\Lambda", "m": "\\mu", "n": "\\nu", "x": "\\xi", "X": "\\Xi", "p": "\\pi", "P": "\\Pi", "r": "\\rho", "s": "\\sigma", "S": "\\Sigma", "o": "\\omega", "O": "\\Omega", "c": "\\chi", "f": "\\phi", "F": "\\varphi", "y": "\\upsilon", "Y": "\\Upsilon", "v": "\\psi", "V": "\\Psi", "u": "\\tau" }
-rv = (trans[m[1]] || ("G" + m[1] + m[1])) ``
+rv = (trans[m[1]] || ("z" + m[1])) ``
 endsnippet
 
 context math(context)
@@ -303,7 +310,17 @@ snippet `\\mathbb{([A-Z])}#` "[G] Math cal (F##)" A
 endsnippet
 
 context math(context)
-snippet mrm "[G] Math rm" A
+snippet `(\\mathbb{[A-Z]})(_[+-])?(\^\*)?([+-])` "[G] Math bb +/- modifier" A
+`` rv = m[1] + "_" + m[4] + (m[3] || "") ``
+endsnippet
+
+context math(context)
+snippet `(\\mathbb{[A-Z]})(_[+-])?\*` "[G] Math bb * modifier" A
+`` rv = m[1] + (m[2] || "") + "^*" ``
+endsnippet
+
+context math(context)
+snippet mrm "[G] Math rm" Aw
 \\mathrm{$1}
 endsnippet
 
@@ -313,12 +330,12 @@ _{$1}
 endsnippet
 
 context math(context)
-snippet `(\B\\[A-Za-z]+|\b[A-Za-z])(\d)` "[G] Auto subscript" A
+snippet `(\B\\[A-Za-z]+|\b\d*[A-Za-z])(\d)` "[G] Auto subscript" A
 ``rv = m[1] + "_" + m[2]``
 endsnippet
 
 context math(context)
-snippet `(\B\\[A-Za-z]+|\b[A-Za-z])_(\d\d)` "[G] Auto subscript 2" A
+snippet `(\B\\[A-Za-z]+|\b\d*[A-Za-z])_(\d\d)` "[G] Auto subscript 2" A
 ``rv = m[1] + "_{" + m[2]``}
 endsnippet
 
@@ -333,7 +350,7 @@ snippet cb "[G] Cube" iA
 endsnippet
 
 context math(context)
-snippet -- "[G] Superscripet" iA
+snippet -- "[G] Superscript" iA
 ^{$1}
 endsnippet
 
@@ -348,7 +365,7 @@ snippet ff "[G] Fraction" wA
 endsnippet
 
 context math(context)
-snippet `(\(((?:\([^()]*\)|[^()])*)\))rt` "[G] Square root auto" A
+snippet `\((((?:\([^()]*\)|[^()])*))\)rt` "[G] Square root auto" A
 \\sqrt{`` rv = m[1] ``}
 endsnippet
 
@@ -363,8 +380,18 @@ snippet srt "[G] Square root" A
 endsnippet
 
 context math(context)
-snippet `\b(?<!\\)(deg|arg|sin|cos|tan|cot|perp|ln|log|max|min|dim|det|in|cup|cap|ge|le|sim|pm|mp|Im|Re|bar|dot|hat|iff)` "[G] Commands" A
+snippet `\b(?<!\\)(?<!\\mathrm\{)(ker|det|deg|sin|cos|tan|cot|ln|log|exp|arg|to|perp|in|cup|cap|ge|le|sim|pm|iff|mid|dim|Im|Re)` "[G] Commands space" A
 `` rv = "\\" + m[1] + " " ``
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)(?<!\\mathrm\{)(bar|dot|hat)` "[G] Commands argument" A
+`` rv = "\\" + m[1] + "{$1}" ``
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)(?<!\\mathrm\{)(max|min)` "[G] Commands" A
+`` rv = "\\" + m[1]``
 endsnippet
 
 context math(context)
@@ -383,23 +410,15 @@ x_i
 endsnippet
 
 context math(context)
-snippet `np(\d)` "[G] _{n+d}" A
-`` rv = `_{n+${m[1]}}` ``
+priority 2
+snippet `[_]?([ni])p(\d)` "[G] _{n/i+d}" A
+`` rv = `_{${m[1]}+${m[2]}}` ``
 endsnippet
 
 context math(context)
-snippet `nm(\d)` "[G] _{n-d}" iA
+priority 2
+snippet `[_]?nm(\d)` "[G] _{n/i-d}" iA
 `` rv = `_{n-${m[1]}}` ``
-endsnippet
-
-context math(context)
-snippet `ip(\d)` "[G] _{i+d}" iA
-`` rv = `_{i+${m[1]}}` ``
-endsnippet
-
-context math(context)
-snippet `im(\d)` "[G] _{i-d}" iA
-`` rv = `_{i-${m[1]}}` ``
 endsnippet
 
 context math(context)
@@ -418,7 +437,7 @@ snippet .. "[G] Ldots" A
 endsnippet
 
 context math(context)
-snippet iim "[G] Implies" A
+snippet iim "[G] Implies" Aw
 \\implies 
 endsnippet
 
@@ -443,6 +462,11 @@ snippet iin "[G] Infinity" wA
 endsnippet
 
 context math(context)
+snippet mpt "[G] Mapsto" A
+\\mapsto 
+endsnippet
+
+context math(context)
 snippet ee "[G] Exists" wA
 \\exists 
 endsnippet
@@ -453,7 +477,7 @@ snippet fa "[G] For all" wA
 endsnippet
 
 context math(context)
-snippet xx "[G] Cross" iA
+snippet xx "[G] Cross" A
 \\times 
 endsnippet
 
@@ -493,18 +517,8 @@ snippet dsp "[G] Displaystyle" wA
 endsnippet
 
 context math(context)
-snippet ddx "[G] Dx" wA
-\\,dx
-endsnippet
-
-context math(context)
-snippet ddz "[G] Dz" wA
-\\,dz
-endsnippet
-
-context math(context)
-snippet ddt "[G] Dt" wA
-\\,dt
+snippet `dd([a-z])` "[G] Differential" A
+`` rv = "\\,d" + m[1] ``
 endsnippet
 
 context math(context)
@@ -515,4 +529,19 @@ endsnippet
 context math(context)
 snippet vv "[G] Vector" wA
 \\vv{$1}
+endsnippet
+
+context math(context)
+snippet nrm "[G] Norm" wA
+\\norm{$1}
+endsnippet
+
+context math(context)
+snippet abs "[G] Absolute value" wA
+\\abs{$1}
+endsnippet
+
+context math(context)
+snippet tld "[G] Tilde" wA
+\\tilde 
 endsnippet
