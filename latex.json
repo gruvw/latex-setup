@@ -39,6 +39,15 @@
 			"\\end{itemize}"
 		]
 	},
+	"[G] Image": {
+		"prefix": "img",
+		"body": [
+			"\\begin{center}",
+			"\t\\includegraphics[width=${2:8}cm]{$1}",
+			"\\end{center}",
+			"$0"
+		]
+	},
 	"[G] Add margin": {
 		"prefix": "adm",
 		"body": [

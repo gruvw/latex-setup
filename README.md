@@ -1,7 +1,7 @@
 # LaTeX Setup
 
-Setting up a good LaTeX writing environment can be pretty hard (at least it had been for me 😅).
-This is why I share my configuration in this repository.
+Setting up a good LaTeX writing environment can be pretty hard (at least it has been for me 😅).
+It is the reason why I share my configuration in this repository.
 
 ## Development environment
 
