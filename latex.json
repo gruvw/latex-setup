@@ -124,6 +124,14 @@
 			"$0"
 		]
 	},
+	"[G] Example": {
+		"prefix": "sssec*",
+		"body": [
+			"\\subsubsection*{${1:$TM_SELECTED_TEXT}}",
+			"",
+			"$0"
+		]
+	},
 	"[G] Text": {
 		"prefix": "txt",
 		"body": [

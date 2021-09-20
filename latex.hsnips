@@ -130,7 +130,7 @@
 
 global
 function math(context) {
-    return context.scopes.some(s => s.startsWith("meta.math")) && !context.scopes.some(s => s.startsWith("comment"));
+    return context.scopes.some(s => s.startsWith("meta.math")) && !context.scopes.some(s => s.startsWith("comment") || s.startsWith("meta.text.normal.tex"));
 }
 endglobal
 
@@ -355,7 +355,7 @@ snippet -- "[G] Superscript" iA
 endsnippet
 
 context math(context)
-snippet `((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)\/$|(\(((?:\([^()]*\)|[^()])*)\))\/$` "[G] Fraction auto" A
+snippet `((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\w+\}|\w))*)\/$|(\(((?:\([^()]*\)|[^()])*)\))\/$` "[G] Fraction auto" A
 \\frac{`` rv = m[1] || m[10]``}{$1}
 endsnippet
 
@@ -411,14 +411,26 @@ endsnippet
 
 context math(context)
 priority 2
-snippet `[_]?([ni])p(\d)` "[G] _{n/i+d}" A
-`` rv = `_{${m[1]}+${m[2]}}` ``
+snippet `[_]?np(\d)` "[G] _{n+d}" A
+`` rv = `_{n+${m[1]}}` ``
 endsnippet
 
 context math(context)
 priority 2
-snippet `[_]?nm(\d)` "[G] _{n/i-d}" iA
+snippet `[_]?nm(\d)` "[G] _{n-d}" iA
 `` rv = `_{n-${m[1]}}` ``
+endsnippet
+
+context math(context)
+priority 2
+snippet `[_]?ip(\d)` "[G] _{i+d}" iA
+`` rv = `_{i+${m[1]}}` ``
+endsnippet
+
+context math(context)
+priority 2
+snippet `[_]?im(\d)` "[G] _{i-d}" iA
+`` rv = `_{i-${m[1]}}` ``
 endsnippet
 
 context math(context)
@@ -447,7 +459,7 @@ snippet iib "[G] Implied by" wA
 endsnippet
 
 context math(context)
-snippet ne "[G] Not equal" wA
+snippet `\b(?<!\\)ne` "[G] Not equal" wA
 \\neq 
 endsnippet
 
