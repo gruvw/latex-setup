@@ -46,7 +46,7 @@
 # sssec T-> \subsubsection{}
 
 # Commands:
-# iim -> \implies
+# imm -> \implies
 # iib -> \impliedby
 # iff -> \iff
 # ge -> \ge
@@ -57,6 +57,8 @@
 # iin -> \infty
 # ee -> \exists
 # fa -> \forall
+# 0n -> \varnothing
+# cir -> \circ
 # xx -> \times
 # cd -> \cdot
 # stm -> \setminus
@@ -86,6 +88,8 @@
 # ker -> \ker
 # det -> \det
 # in -> \in
+# not -> \not
+# sub -> \subset
 # cup -> \cup
 # cap -> \cap
 # mid -> \mid
@@ -118,6 +122,7 @@
 # im`1` -> _{i-1}
 # xip`2` -> x_{i+2}
 # `R`#`+*` -> \mathbb{R}_+^*
+# \vv{`a`}`n` -> \vv{a}_n
 
 # Miscellaneous:
 # texdoc T-> new document template
@@ -380,7 +385,7 @@ snippet srt "[G] Square root" A
 endsnippet
 
 context math(context)
-snippet `\b(?<!\\)(?<!\\mathrm\{)(ker|det|deg|sin|cos|tan|cot|ln|log|exp|arg|to|perp|in|cup|cap|ge|le|sim|pm|iff|mid|dim|Im|Re)` "[G] Commands space" A
+snippet `\b(?<!\\)(?<!\\mathrm\{)(ker|det|deg|sin|cos|tan|cot|ln|log|exp|arg|to|perp|in|cup|cap|ge|le|sim|pm|iff|mid|dim|Im|Re|not)` "[G] Commands space" A
 `` rv = "\\" + m[1] + " " ``
 endsnippet
 
@@ -449,13 +454,23 @@ snippet .. "[G] Ldots" A
 endsnippet
 
 context math(context)
-snippet iim "[G] Implies" Aw
+snippet imm "[G] Implies" Aw
 \\implies 
 endsnippet
 
 context math(context)
 snippet iib "[G] Implied by" wA
 \\impliedby 
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)sub` "[G] Subset" wA
+\\subset 
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)cir` "[G] Circle" wA
+\\circ 
 endsnippet
 
 context math(context)
@@ -524,6 +539,11 @@ snippet sst "[G] Set" wA
 endsnippet
 
 context math(context)
+snippet 0n "[G] Null set" wA
+\\varnothing
+endsnippet
+
+context math(context)
 snippet dsp "[G] Displaystyle" wA
 \\displaystyle 
 endsnippet
@@ -541,6 +561,11 @@ endsnippet
 context math(context)
 snippet vv "[G] Vector" wA
 \\vv{$1}
+endsnippet
+
+context math(context)
+snippet `(\\vv\{\w+?\})(\w)` "[G] Vector subscript" wA
+`` rv = `${m[1]}_${m[2]}` ``
 endsnippet
 
 context math(context)
