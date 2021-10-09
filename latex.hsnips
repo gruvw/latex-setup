@@ -32,6 +32,7 @@
 # nrm -> \norm{}
 # abs -> \abs{}
 # bar -> \bar{}
+# ovl -> \overline{}
 # dot -> \dot{}
 # hat -> \hat{}
 # ce T-> \ce{}
@@ -466,6 +467,11 @@ endsnippet
 context math(context)
 snippet `\b(?<!\\)sub` "[G] Subset" wA
 \\subset 
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)ovl` "[G] Overline" wA
+\\overline{$1}
 endsnippet
 
 context math(context)
