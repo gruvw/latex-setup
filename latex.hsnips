@@ -23,8 +23,8 @@
 # Arguments:
 # ssm -> \sum_{i=1}^{}
 # ppr -> \prod_{i=1}^{}
-# lli -> \lim_{x \to \infty}
-# alli -> \xrightarrow[x \to \infty]
+# lim -> \lim_{x \to \infty}
+# alim -> \xrightarrow[x \to \infty]
 # dint -> \int_{-\infty}^{\infty}
 # ff -> \frac{}{}
 # srt -> \sqrt{}
@@ -291,12 +291,12 @@ snippet ppr "[G] Product" wA
 endsnippet
 
 context math(context)
-snippet lli "[G] Limit" wA
+snippet lim "[G] Limit" wA
 \\lim\\limits_{${1:x} \\to ${2:\infty}} 
 endsnippet
 
 context math(context)
-snippet alli "[G] Arrow limit" wA
+snippet alim "[G] Arrow limit" wA
 \\xrightarrow[${1:x} \\to ${2:\infty}]{} 
 endsnippet
 
@@ -570,7 +570,7 @@ snippet vv "[G] Vector" wA
 endsnippet
 
 context math(context)
-snippet `(\\vv\{\w+?\})(\w)` "[G] Vector subscript" wA
+snippet `(\\vv\{\w+?\})([a-zA-Z\d])` "[G] Vector subscript" wA
 `` rv = `${m[1]}_${m[2]}` ``
 endsnippet
 
