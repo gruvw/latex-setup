@@ -1,3 +1,5 @@
+![peek_final](https://user-images.githubusercontent.com/63407038/139681418-7e1c42a1-380f-4400-a875-0f1af9a4c3b9.gif)
+
 # LaTeX Setup
 
 Setting up a good LaTeX writing environment can be pretty hard (at least it has been for me 😅).
