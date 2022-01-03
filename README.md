@@ -45,7 +45,7 @@ I don't think any of them needs extra explanation.
 
 You will find my **HyperSnips snippets** in the `latex.hsnips` file.
 
-Most of them will only trigger while typing inside a math context.
+Most of them will only trigger while typing inside a math context (while typing equations).
 
 I explain some of them as there are some complex ones. It should help you to understand their definitions.
 
@@ -62,6 +62,7 @@ When using this snippet, press `<tab>` if you need the content of the selected t
 Used to generate a matrix.
 
 How to activate:
+
 1. The first character must be `M`
 2. The second character is the matrix type: `p` for `pmatrix`, `v` for `vmatrix`, etc
 3. The third character is the number of rows in the matrix
@@ -73,6 +74,7 @@ The snippet will trigger automatically once you typed all the characters.
 On top of that, you can navigate with `<tab>` to input each matrix elements.
 
 Example: `Mp241b` will result in the following
+
 ```latex
 \begin{pmatrix}
 1 & 1 & 1 & 1\\
@@ -85,6 +87,7 @@ Example: `Mp241b` will result in the following
 Used to generate `\left \right` commands.
 
 How to activate:
+
 1. Must start with `lr`
 2. The next character can be one of the following: `)`, `]`, `>`, `}`, `v`, `V`
 
@@ -95,10 +98,12 @@ See `latex.hsnips` file for definitions.
 Used to input Greek letters faster.
 
 How to activate:
+
 1. Must start with `z`
 2. The next character must correspond to the greek letter
 
 Examples:
+
 - `za`: `\alpha`
 - `zD`: `\Delta`
 
@@ -109,11 +114,13 @@ See `latex.hsnips` file for the other associations.
 Used for `\mathbb{}` and `\mathcal{}` commands.
 
 How to activate:
+
 1. The first character must be the letter you want to modify
 2. If you input the `#` character just after, it will surround your letter with `\mathbb{}`
 3. If you input another `#` after that, it will modify the command and use `\mathcal{}` instead
 
 Examples:
+
 - `R#`: `\mathbb{R}`
 - `\mathbb{F}#`: `\mathcal{F}`
 - `F##`: `\mathcal{F}`
@@ -123,11 +130,13 @@ Examples:
 If you type a one or two digit(s) number directly after a letter or a command, it will be automatically subscripted.
 
 Examples:
+
 - `a1`: `a_1`
 - `x34`: `x_{34}`
 - `za2`: `\alpha_2` (see Greek letter)
 
 Special subscripts for `n/i + d` or `n/i - d`:
+
 - `np1`: `_{n+1}`
 - `nm2`: `_{n-2}`
 - `ip3`: `_{i+3}`
@@ -138,6 +147,7 @@ Using the `/` character right next to a small expression will result in a fracti
 Surrounding any expression with parenthesis followed by a `/` will result in a fraction.
 
 Examples:
+
 - `1/2`: `\frac{1}{2}`
 - `x/`: `\frac{x}{}`
 - `\alpha/`: `\frac{\alpha}{}`
@@ -153,6 +163,7 @@ Surrounding any expression with parenthesis followed by `rt` will result in the 
 If a number is typed just after a `\sqrt{}` command, it will result in the n-root (changing the current one if it already exists).
 
 Examples:
+
 - `(x^2 - x + 2)rt`: `\sqrt{x^2 - x + 2}`
 - `\sqrt{x^2 - x + 2}4`: `\sqrt[4]{x^2 - x + 2}`
 - `\sqrt[4]{x^2 - x + 2}5`: `\sqrt[5]{x^2 - x + 2}`

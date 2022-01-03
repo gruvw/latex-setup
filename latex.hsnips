@@ -250,13 +250,13 @@ endsnippet
 context math(context)
 snippet `M([\ pbvBV])(\d)(\d)(.)([bn])` "[G] Matrix" A
 ``
-t = m[1] === ' ' ? '' : m[1]
+type = m[1] === ' ' ? '' : m[1]
 n = 1
-res = `\\begin{${t}matrix}`
+res = `\\begin{${type}matrix}`
 res += m[5] == "b" ? "\n" : ''
 for (let i = 0; i < m[2]; i++) {
 	for (let j = 0; j < m[3]; j++) {
-		res += `\${${n++}:${m[4]}}`
+		res += snip.tabstop(n++, m[4])
 		if (j + 1 != m[3]) {
 			res += " & "
 		} else {
@@ -267,7 +267,7 @@ for (let i = 0; i < m[2]; i++) {
 		}
 	}
 }
-res += `\\end{${t}matrix}`
+res += `\\end{${type}matrix}`
 rv = res
 ``
 endsnippet
@@ -275,7 +275,7 @@ endsnippet
 context math(context)
 snippet `lr([\)\]\>\}vV])` "[G] Left-right" A
 `` trans = {")": ["(", ")"], "]": ["[", "]"], ">": ["<", ">"], "}": ["{", "}"], "v": ["\\lvert", "\\rvert"], "V": ["\\lVert", "\\rVert"]}
-rv = "\\left" + trans[m[1]][0] + " $1 " + "\\right" + trans[m[1]][1] ``
+rv = `\\left${trans[m[1]][0]} ${snip.tabstop(1)} \\right${trans[m[1]][1]}` ``
 endsnippet
 
 context math(context)
@@ -291,7 +291,7 @@ endsnippet
 
 context math(context)
 snippet ppr "[G] Product" wA
-\\prod_{${1:i}=${2:1}}^{$3} 
+\\prod_{${1:i}=${2:1}}^{${3:n}} 
 endsnippet
 
 context math(context)
@@ -311,12 +311,12 @@ endsnippet
 
 context math(context)
 snippet `\b([A-Z])#` "[G] Math bb" A
-``rv = '\\mathbb{' + m[1] + '}'``
+`` rv = `\\mathbb{${m[1]}}` ``
 endsnippet
 
 context math(context)
 snippet `\\mathbb{([A-Z])}#` "[G] Math cal (F##)" A
-``rv = '\\mathcal{' + m[1] + '}'``
+`` rv = `\\mathcal{${m[1]}}` ``
 endsnippet
 
 context math(context)
@@ -341,12 +341,12 @@ endsnippet
 
 context math(context)
 snippet `(\B\\[A-Za-z]+|\b\d*[A-Za-z])(\d)` "[G] Auto subscript" A
-``rv = m[1] + "_" + m[2]``
+`` rv = m[1] + "_" + m[2] ``
 endsnippet
 
 context math(context)
 snippet `(\B\\[A-Za-z]+|\b\d*[A-Za-z])_(\d\d)` "[G] Auto subscript 2" A
-``rv = m[1] + "_{" + m[2]``}
+`` rv = `${m[1]}_{${m[2]}}` ``
 endsnippet
 
 context math(context)
@@ -366,7 +366,7 @@ endsnippet
 
 context math(context)
 snippet `((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\w+\}|\w))*)\/$|(\(((?:\([^()]*\)|[^()])*)\))\/$` "[G] Fraction auto" A
-\\frac{`` rv = m[1] || m[10]``}{$1}
+\\frac{`` rv = m[1] || m[10] ``}{$1}
 endsnippet
 
 context math(context)
@@ -391,27 +391,27 @@ endsnippet
 
 context math(context)
 snippet `\b(?<!\\)(?<!\\mathrm\{)(Vect|rg)` "[G] Special commands" A
-`` rv = "\\mathrm{" + m[1] + "}" ``
+`` rv = `\\mathrm{${m[1]}}` ``
 endsnippet
 
 context math(context)
 snippet `\b(?<!\\)(?<!\\mathrm\{)(ker|det|deg|sin|cos|tan|cot|ln|log|exp|arg|to|perp|in|cup|cap|ge|le|sim|pm|iff|mid|dim|Im|Re|not)` "[G] Commands space" A
-`` rv = "\\" + m[1] + " " ``
+`` rv = `\\${m[1]} ` ``
 endsnippet
 
 context math(context)
-snippet `\b(?<!\\)(?<!\\mathrm\{)(bar|dot|hat)` "[G] Commands argument" A
-`` rv = "\\" + m[1] + "{$1}" ``
+snippet `\b(?<!\\)(?<!\\mathrm\{)(bar|dot|hat)` "[G] Commands (rm) argument" A
+`` rv = `\\${m[1]}{${snip.tabstop(1)}}` ``
 endsnippet
 
 context math(context)
-snippet `\b(?<!\\)(?<!\\mathrm\{)(max|min)` "[G] Commands" A
-`` rv = "\\" + m[1]``
+snippet `\b(?<!\\)(?<!\\mathrm\{)(max|min)` "[G] Commands (rm)" A
+`` rv = `\\${m[1]}` ``
 endsnippet
 
 context math(context)
 snippet `\b(?<!\\)a(sin|cos|tan)` "[G] Arc-trigo" A
-`` rv = "\\arc" + m[1] + " " ``
+`` rv = `\\arc${m[1]} ` ``
 endsnippet
 
 context math(context)
@@ -564,8 +564,8 @@ snippet dsp "[G] Displaystyle" wA
 endsnippet
 
 context math(context)
-snippet `dd([a-z])` "[G] Differential" A
-`` rv = "\\,d" + m[1] ``
+snippet `\b(?<!\\)dd([a-z])` "[G] Differential" A
+`` rv = `\\,d${m[1]}` ``
 endsnippet
 
 context math(context)
@@ -579,7 +579,7 @@ snippet vv "[G] Vector" wA
 endsnippet
 
 context math(context)
-snippet `(\\vv\{\w+?\})([a-zA-Z\d])` "[G] Vector subscript" wA
+snippet `(\\vv\{\w+?\})([a-zA-Z\d])` "[G] Vector auto subscript" wA
 `` rv = `${m[1]}_${m[2]}` ``
 endsnippet
 
