@@ -27,10 +27,12 @@
 # alim -> \xrightarrow[x \to \infty]
 # dint -> \int_{-\infty}^{\infty}
 # ff -> \frac{}{}
+# part -> \dfrac{\partial }{\partial }
 # srt -> \sqrt{}
 # vv -> \vv{}
 # nrm -> \norm{}
 # abs -> \abs{}
+# num -> \num{}
 # bar -> \bar{}
 # ovl -> \overline{}
 # dot -> \dot{}
@@ -60,12 +62,13 @@
 # fa -> \forall
 # 0n -> \varnothing
 # cir -> \circ
+# nnt -> \int
+# ont -> \oint 
 # xx -> \times
 # cd -> \cdot
 # stm -> \setminus
-# ssb -> \subset
 # to -> \to
-# mpt -> \mapsto 
+# mto -> \mapsto 
 # lra -> \leftrightarrow 
 # Lra -> \Leftrightarrow 
 # qq -> \quad
@@ -91,6 +94,7 @@
 # in -> \in
 # not -> \not
 # sub -> \subset
+# sue -> \subseteq
 # cup -> \cup
 # cap -> \cap
 # mid -> \mid
@@ -98,6 +102,8 @@
 # Im -> \Im
 # Re -> \Re
 # exp -> \exp
+# grd -> \nabla 
+# eqv => \equiv 
 
 # Special commands (mathrm):
 # Vect -> \mathrm{Vect}
@@ -126,6 +132,7 @@
 # ip`1` -> _{i+1}
 # im`1` -> _{i-1}
 # xip`2` -> x_{i+2}
+# `R`#`n` -> \mathbb{R}^n
 # `R`#`+*` -> \mathbb{R}_+^*
 # \vv{`a`}`n` -> \vv{a}_n
 
@@ -136,6 +143,7 @@
 # `A`# -> \mathbb{A}
 # `A`## -> \mathcal{A}
 # dd`x` -> \\,dx
+# \`chapter`{}* -> \chapter*{}
 
 
 global
@@ -177,6 +185,7 @@ ${3:\usepackage{minted\}  % Code fences ([cache=false])
     linenos,
     breaklines
 \}
+\usemintedstyle{pastie\}
 }
 % GEOMETRY
 \usepackage[
@@ -280,7 +289,7 @@ endsnippet
 
 context math(context)
 snippet `(?<![\\a-zA-Z])z([a-zA-Z])(?![a-zA-Z])` "[G] Greek letter" A
-`` trans = {"a": "\\alpha", "b": "\\beta", "g": "\\gamma", "G": "\\Gamma", "d": "\\delta", "D": "\\Delta", "e": "\\epsilon", "E": "\\varepsilon", "z": "\\zeta", "h": "\\eta", "t": "\\theta", "T": "\\Theta", "k": "\\kappa", "i": "\\iota", "l": "\\lambda", "L": "\\Lambda", "m": "\\mu", "n": "\\nu", "x": "\\xi", "X": "\\Xi", "p": "\\pi", "P": "\\Pi", "r": "\\rho", "s": "\\sigma", "S": "\\Sigma", "o": "\\omega", "O": "\\Omega", "c": "\\chi", "f": "\\phi", "F": "\\varphi", "y": "\\upsilon", "Y": "\\Upsilon", "v": "\\psi", "V": "\\Psi", "u": "\\tau" }
+`` trans = {"a": "\\alpha", "b": "\\beta", "g": "\\gamma", "G": "\\Gamma", "d": "\\delta", "D": "\\Delta", "e": "\\epsilon", "E": "\\varepsilon", "z": "\\zeta", "h": "\\eta", "t": "\\theta", "T": "\\Theta", "k": "\\kappa", "i": "\\iota", "l": "\\lambda", "L": "\\Lambda", "m": "\\mu", "n": "\\nu", "x": "\\xi", "X": "\\Xi", "p": "\\pi", "P": "\\Pi", "r": "\\rho", "s": "\\sigma", "S": "\\Sigma", "o": "\\omega", "O": "\\Omega", "c": "\\chi", "f": "\\phi", "F": "\\varphi", "I": "\\Phi", "y": "\\upsilon", "Y": "\\Upsilon", "v": "\\psi", "V": "\\Psi", "u": "\\tau" }
 rv = (trans[m[1]] || ("z" + m[1])) ``
 endsnippet
 
@@ -320,13 +329,13 @@ snippet `\\mathbb{([A-Z])}#` "[G] Math cal (F##)" A
 endsnippet
 
 context math(context)
-snippet `(\\mathbb{[A-Z]})(_[+-])?(\^\*)?([+-])` "[G] Math bb +/- modifier" A
+snippet `(\\mathbb{[A-Z]})(_[+-])?(\^[\w\*])?([+-])` "[G] Math bb +/- modifier" A
 `` rv = m[1] + "_" + m[4] + (m[3] || "") ``
 endsnippet
 
 context math(context)
-snippet `(\\mathbb{[A-Z]})(_[+-])?\*` "[G] Math bb * modifier" A
-`` rv = m[1] + (m[2] || "") + "^*" ``
+snippet `(\\mathbb{[A-Z]})(_[+-])?([\w\*])` "[G] Math bb superscript modifier" A
+`` rv = m[1] + (m[2] || "") + "^" + m[3] ``
 endsnippet
 
 context math(context)
@@ -360,13 +369,17 @@ snippet cb "[G] Cube" iA
 endsnippet
 
 context math(context)
-snippet -- "[G] Superscript" iA
+snippet -- "[G] Superscript" iAA
 ^{$1}
 endsnippet
 
 context math(context)
 snippet `((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\w+\}|\w))*)\/$|(\(((?:\([^()]*\)|[^()])*)\))\/$` "[G] Fraction auto" A
 \\frac{`` rv = m[1] || m[10] ``}{$1}
+endsnippet
+
+snippet `(\\((sub)*section|chapter))({.*)}\*` "[G] Star title post-fix" A
+`` rv = m[1] + "*" + m[4] + "}" ``
 endsnippet
 
 context math(context)
@@ -380,7 +393,7 @@ snippet `\((((?:\([^()]*\)|[^()])*))\)rt` "[G] Square root auto" A
 endsnippet
 
 context math(context)
-snippet `\\sqrt(?:\[\d\])?\{(.*)\}(\d)` "[G] N root auto / modify N" A
+snippet `\\sqrt(?:\[\d\])?\{(.*)\}(\w)` "[G] N root auto / modify N" A
 \\sqrt[`` rv = m[2] ``]{`` rv = m[1] ``}
 endsnippet
 
@@ -395,7 +408,7 @@ snippet `\b(?<!\\)(?<!\\mathrm\{)(Vect|rg)` "[G] Special commands" A
 endsnippet
 
 context math(context)
-snippet `\b(?<!\\)(?<!\\mathrm\{)(ker|det|deg|sin|cos|tan|cot|ln|log|exp|arg|to|perp|in|cup|cap|ge|le|sim|pm|iff|mid|dim|Im|Re|not)` "[G] Commands space" A
+snippet `\b(?<!\\)(?<!\\mathrm\{)(ker|det|deg|sin|cos|tan|cot|ln|exp|arg|to|perp|in|cup|cap|ge|le|sim|pm|iff|mid|dim|Im|Re|not)` "[G] Commands space" A
 `` rv = `\\${m[1]} ` ``
 endsnippet
 
@@ -405,7 +418,7 @@ snippet `\b(?<!\\)(?<!\\mathrm\{)(bar|dot|hat)` "[G] Commands (rm) argument" A
 endsnippet
 
 context math(context)
-snippet `\b(?<!\\)(?<!\\mathrm\{)(max|min)` "[G] Commands (rm)" A
+snippet `\b(?<!\\)(?<!\\mathrm\{)(max|min|log)` "[G] Commands (rm)" A
 `` rv = `\\${m[1]}` ``
 endsnippet
 
@@ -479,6 +492,16 @@ snippet `\b(?<!\\)sub` "[G] Subset" wA
 endsnippet
 
 context math(context)
+snippet `\b(?<!\\)sue` "[G] Subseteq" wA
+\\subseteq 
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)grd` "[G] Gradient" wA
+\\nabla 
+endsnippet
+
+context math(context)
 snippet `\b(?<!\\)ovl` "[G] Overline" wA
 \\overline{$1}
 endsnippet
@@ -504,7 +527,7 @@ snippet iin "[G] Infinity" wA
 endsnippet
 
 context math(context)
-snippet mpt "[G] Mapsto" A
+snippet mto "[G] Mapsto" A
 \\mapsto 
 endsnippet
 
@@ -564,13 +587,8 @@ snippet dsp "[G] Displaystyle" wA
 endsnippet
 
 context math(context)
-snippet `\b(?<!\\)dd([a-z])` "[G] Differential" A
+snippet `\b(?<!\\)dd(\w)` "[G] Differential" A
 `` rv = `\\,d${m[1]}` ``
-endsnippet
-
-context math(context)
-snippet ssb "[G] Subset" wA
-\\subset 
 endsnippet
 
 context math(context)
@@ -594,6 +612,31 @@ snippet abs "[G] Absolute value" wA
 endsnippet
 
 context math(context)
+snippet num "[G] Num" wA
+\\num{$1}
+endsnippet
+
+context math(context)
 snippet tld "[G] Tilde" wA
 \\tilde 
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)part` "[G] Partial derivative" wA
+\\dfrac{\\partial $1}{\\partial $2}
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)nnt` "[G] Integral" wA
+\\int
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)ont` "[G] Surface integral" wA
+\\oint 
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)eqv` "[G] Surface integral" wA
+\\equiv 
 endsnippet
