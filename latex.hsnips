@@ -47,6 +47,7 @@
 # sec T-> \section{}
 # ssec T-> \subsection{}
 # sssec T-> \subsubsection{}
+# tld -> \widetilde{}
 
 # Commands:
 # imm -> \implies
@@ -103,7 +104,8 @@
 # Re -> \Re
 # exp -> \exp
 # grd -> \nabla 
-# eqv => \equiv 
+# eqv -> \equiv 
+# prt -> \partial 
 
 # Special commands (mathrm):
 # Vect -> \mathrm{Vect}
@@ -119,22 +121,21 @@
 # (`3x - y`)rt3 -> \sqrt[3]{3x -y}
 
 # Subscript / Superscript
-# __ -> _{}
 # -- -> ^{}
+# __ -> _{}
+# -_ -> \limits_
 # sq -> ^2
 # cb -> ^3
 # xn -> x_n
 # xi -> x_i
 # yn -> y_n
 # yi -> y_i
-# np`1` -> _{n+1}
-# nm`1` -> _{n-1}
-# ip`1` -> _{i+1}
-# im`1` -> _{i-1}
+# `n`p`1` -> _{n+1}
+# `n`m`1` -> _{n-1}
 # xip`2` -> x_{i+2}
 # `R`#`n` -> \mathbb{R}^n
 # `R`#`+*` -> \mathbb{R}_+^*
-# \vv{`a`}`n` -> \vv{a}_n
+# \vv{`a`}`ij` -> \vv{a}_{ij}
 
 # Miscellaneous:
 # texdoc T-> new document template
@@ -282,8 +283,8 @@ rv = res
 endsnippet
 
 context math(context)
-snippet `lr([\)\]\>\}vV])` "[G] Left-right" A
-`` trans = {")": ["(", ")"], "]": ["[", "]"], ">": ["<", ">"], "}": ["{", "}"], "v": ["\\lvert", "\\rvert"], "V": ["\\lVert", "\\rVert"]}
+snippet `lr([\|\)\]\>\}vV])` "[G] Left-right" A
+`` trans = {"|": ["|", "|"], ")": ["(", ")"], "]": ["[", "]"], ">": ["<", ">"], "}": ["{", "}"], "v": ["\\lvert", "\\rvert"], "V": ["\\lVert", "\\rVert"]}
 rv = `\\left${trans[m[1]][0]} ${snip.tabstop(1)} \\right${trans[m[1]][1]}` ``
 endsnippet
 
@@ -349,13 +350,18 @@ _{$1}
 endsnippet
 
 context math(context)
+snippet `-_` "[G] Limits subscript" iA
+\\limits_
+endsnippet
+
+context math(context)
 snippet `(\B\\[A-Za-z]+|\b\d*[A-Za-z])(\d)` "[G] Auto subscript" A
 `` rv = m[1] + "_" + m[2] ``
 endsnippet
 
 context math(context)
-snippet `(\B\\[A-Za-z]+|\b\d*[A-Za-z])_(\d\d)` "[G] Auto subscript 2" A
-`` rv = `${m[1]}_{${m[2]}}` ``
+snippet `_([A-Za-z\d]{2})` "[G] Auto subscript 2" A
+`` rv = `_{${m[1]}}` ``
 endsnippet
 
 context math(context)
@@ -398,7 +404,7 @@ snippet `\\sqrt(?:\[\d\])?\{(.*)\}(\w)` "[G] N root auto / modify N" A
 endsnippet
 
 context math(context)
-snippet srt "[G] Square root" A
+snippet srt "[G] Square root" Ai
 \\sqrt{$1}
 endsnippet
 
@@ -439,27 +445,17 @@ endsnippet
 
 context math(context)
 priority 2
-snippet `[_]?np(\d)` "[G] _{n+d}" A
-`` rv = `_{n+${m[1]}}` ``
+# M not allowed to prevent matrix snippet expansion Mp1(10n)
+snippet `(?!M)_?(\w)p(\d)` "[G] _{n+d}" A
+`` rv = `_{${m[1]}+${m[2]}}` ``
 endsnippet
 
 context math(context)
 priority 2
-snippet `[_]?nm(\d)` "[G] _{n-d}" iA
-`` rv = `_{n-${m[1]}}` ``
+snippet `_?(\w)m(\d)` "[G] _{n-d}" iA
+`` rv = `_{${m[1]}-${m[2]}}` ``
 endsnippet
 
-context math(context)
-priority 2
-snippet `[_]?ip(\d)` "[G] _{i+d}" iA
-`` rv = `_{i+${m[1]}}` ``
-endsnippet
-
-context math(context)
-priority 2
-snippet `[_]?im(\d)` "[G] _{i-d}" iA
-`` rv = `_{i-${m[1]}}` ``
-endsnippet
 
 context math(context)
 snippet yn "[G] y_n" wA
@@ -522,7 +518,7 @@ snippet app "[G] Almost equal" wA
 endsnippet
 
 context math(context)
-snippet iin "[G] Infinity" wA
+snippet `\b(?<!\\)iin` "[G] Infinity" wA
 \\infty
 endsnippet
 
@@ -596,10 +592,10 @@ snippet vv "[G] Vector" wA
 \\vv{$1}
 endsnippet
 
-context math(context)
-snippet `(\\vv\{\w+?\})([a-zA-Z\d])` "[G] Vector auto subscript" wA
-`` rv = `${m[1]}_${m[2]}` ``
-endsnippet
+# context math(context)
+# snippet `(\\vv\{[\w\\]+?\})([A-Za-z\d])` "[G] Vector auto subscript" wA
+# `` rv = `${m[1]}_${m[2]}` ``
+# endsnippet
 
 context math(context)
 snippet nrm "[G] Norm" wA
@@ -618,12 +614,12 @@ endsnippet
 
 context math(context)
 snippet tld "[G] Tilde" wA
-\\tilde 
+\\widetilde{$1}
 endsnippet
 
 context math(context)
 snippet `\b(?<!\\)part` "[G] Partial derivative" wA
-\\dfrac{\\partial $1}{\\partial $2}
+\\frac{\\partial $1}{\\partial $2}
 endsnippet
 
 context math(context)
@@ -637,6 +633,11 @@ snippet `\b(?<!\\)ont` "[G] Surface integral" wA
 endsnippet
 
 context math(context)
-snippet `\b(?<!\\)eqv` "[G] Surface integral" wA
+snippet `\b(?<!\\)eqv` "[G] Equiv" wA
 \\equiv 
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)prt` "[G] Partial" wA
+\\partial 
 endsnippet
