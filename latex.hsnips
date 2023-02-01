@@ -204,6 +204,7 @@ ${3:\usepackage{minted\}  % Code fences ([cache=false])
 ${4:\usepackage{graphicx\}  % Include graphics
 \graphicspath{{latex-img/\}\}
 \usepackage{caption\}  % Caption without figures
+\usepackage{float}
 
 }
 % HYPERLINKS
@@ -468,7 +469,7 @@ y_i
 endsnippet
 
 context math(context)
-snippet .. "[G] Ldots" A
+snippet .. "[G] Ldots" Ai
 \\ldots
 endsnippet
 

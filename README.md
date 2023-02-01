@@ -51,6 +51,18 @@ I explain some of them as there are some complex ones. It should help you to und
 
 Example format: `expression`: `replaced by`
 
+### Examples
+
+What follows are some useful examples of snippets or snippets combinations:
+
+```text
+A21/L11: \frac{A_{21}}{L_{11}}
+Mp321n: \begin{pmatrix}1 & 1\\1 & 1\\1 & 1\end{pmatrix} (with placeholders on values)
+3zpsq/2: \frac{3\pi^2}{2}
+2(x-y)rt3: 2\sqrt[3]{x-y}
+aim3 inR#+*: a_{i-3} \in \mathbb{R}_+^*
+```
+
 #### Document template
 
 Used to generate boilerplate code for a new document.
