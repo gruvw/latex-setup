@@ -51,7 +51,7 @@ I explain some of them as there are some complex ones. It should help you to und
 
 Example format: `expression`: `replaced by`
 
-### Examples
+#### Examples
 
 What follows are some useful examples of snippets or snippets combinations:
 

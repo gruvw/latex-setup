@@ -23,7 +23,10 @@
 # Commands with arguments:
 # ssm -> \sum_{i=1}^{}
 # ppr -> \prod_{i=1}^{}
-# lim -> \lim_{x \to \infty}
+# bcu -> \bigcup_{i=1}^{\infty}
+# bca -> \bigcap_{i=1}^{\infty}
+# lim -> \lim\limits_{x \to \infty}
+# ilim -> \lim_{x \to \infty}
 # alim -> \xrightarrow[x \to \infty]
 # dint -> \int_{-\infty}^{\infty}
 # ff -> \frac{}{}
@@ -48,6 +51,8 @@
 # ssec T-> \subsection{}
 # sssec T-> \subsubsection{}
 # tld -> \widetilde{}
+# vb -> \mathbf{}
+# bnm -> \binom{n}{k}
 
 # Commands:
 # imm -> \implies
@@ -94,7 +99,8 @@
 # det -> \det
 # in -> \in
 # not -> \not
-# sub -> \subset
+# sub -> \subset 
+# sup -> \supset 
 # sue -> \subseteq
 # cup -> \cup
 # cap -> \cap
@@ -106,6 +112,8 @@
 # grd -> \nabla 
 # eqv -> \equiv 
 # prt -> \partial 
+# emp -> \emptyset
+# awb -> \allowbreak 
 
 # Special commands (mathrm):
 # Vect -> \mathrm{Vect}
@@ -306,8 +314,23 @@ snippet ppr "[G] Product" wA
 endsnippet
 
 context math(context)
+snippet bcu "[G] Big Cup" wA
+\\bigcup_{${1:i}=${2:1}}^{${3:\\infty}}
+endsnippet
+
+context math(context)
+snippet bca "[G] Big Cap" wA
+\\bigcap_{${1:i}=${2:1}}^{${3:\\infty}}
+endsnippet
+
+context math(context)
 snippet `\b(?<!\\)lim` "[G] Limit" wA
 \\lim\\limits_{${1:x} \\to ${2:\infty}} 
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)ilim` "[G] Inline Limit" wA
+\\lim_{${1:x} \\to ${2:\infty}} 
 endsnippet
 
 context math(context)
@@ -489,6 +512,11 @@ snippet `\b(?<!\\)sub` "[G] Subset" wA
 endsnippet
 
 context math(context)
+snippet `\b(?<!\\)sup` "[G] Supset" wA
+\\supset 
+endsnippet
+
+context math(context)
 snippet `\b(?<!\\)sue` "[G] Subseteq" wA
 \\subseteq 
 endsnippet
@@ -499,6 +527,11 @@ snippet `\b(?<!\\)grd` "[G] Gradient" wA
 endsnippet
 
 context math(context)
+snippet `\b(?<!\\)awb` "[G] Allow Break" wA
+\\allowbreak 
+endsnippet
+
+context math(context)
 snippet `\b(?<!\\)ovl` "[G] Overline" wA
 \\overline{$1}
 endsnippet
@@ -506,6 +539,11 @@ endsnippet
 context math(context)
 snippet `\b(?<!\\)cir` "[G] Circle" wA
 \\circ 
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)emp` "[G] Empty Set" wA
+\\emptyset
 endsnippet
 
 context math(context)
@@ -609,6 +647,11 @@ snippet abs "[G] Absolute value" wA
 endsnippet
 
 context math(context)
+snippet vb "[G] Bold vector" wA
+\\mathbf{$1}
+endsnippet
+
+context math(context)
 snippet num "[G] Num" wA
 \\num{$1}
 endsnippet
@@ -616,6 +659,11 @@ endsnippet
 context math(context)
 snippet tld "[G] Tilde" wA
 \\widetilde{$1}
+endsnippet
+
+context math(context)
+snippet bnm "[G] Binomial" wA
+\\binom{${1:n}}{${2:k}}
 endsnippet
 
 context math(context)
