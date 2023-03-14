@@ -12,7 +12,7 @@ I am using [VSCode](https://code.visualstudio.com/) as my IDE for writing LaTeX.
 
 You will find my **VSCode settings** (regarding LaTeX) in the `settings.json` file.
 
-**Note**: My LaTeX Cheat Sheet template repository might also interest you <https://github.com/gruvw/cookiecutter-cheatsheet>!
+**Note**: My LaTeX Cheat Sheet template repository might also interest you [gruvw/cookiecutter-cheatsheet](https://github.com/gruvw/cookiecutter-cheatsheet) !
 
 ### Extensions
 
