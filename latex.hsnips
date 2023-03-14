@@ -21,10 +21,10 @@
 # miti T-> \mintinline{}{}
 
 # Commands with arguments:
-# ssm -> \sum_{i=1}^{}
-# ppr -> \prod_{i=1}^{}
-# bcu -> \bigcup_{i=1}^{\infty}
-# bca -> \bigcap_{i=1}^{\infty}
+# ssm -> \sum_{i=1}^{} 
+# ppr -> \prod_{i=1}^{} 
+# bcu -> \bigcup_{i=1}^{\infty} 
+# bca -> \bigcap_{i=1}^{\infty} 
 # lim -> \lim\limits_{x \to \infty}
 # ilim -> \lim_{x \to \infty}
 # alim -> \xrightarrow[x \to \infty]
@@ -134,10 +134,6 @@
 # -_ -> \limits_
 # sq -> ^2
 # cb -> ^3
-# xn -> x_n
-# xi -> x_i
-# yn -> y_n
-# yi -> y_i
 # `n`p`1` -> _{n+1}
 # `n`m`1` -> _{n-1}
 # xip`2` -> x_{i+2}
@@ -315,12 +311,12 @@ endsnippet
 
 context math(context)
 snippet bcu "[G] Big Cup" wA
-\\bigcup_{${1:i}=${2:1}}^{${3:\\infty}}
+\\bigcup_{${1:i}=${2:1}}^{${3:\\infty}} 
 endsnippet
 
 context math(context)
 snippet bca "[G] Big Cap" wA
-\\bigcap_{${1:i}=${2:1}}^{${3:\\infty}}
+\\bigcap_{${1:i}=${2:1}}^{${3:\\infty}} 
 endsnippet
 
 context math(context)
@@ -458,16 +454,6 @@ snippet `\b(?<!\\)a(sin|cos|tan)` "[G] Arc-trigo" A
 endsnippet
 
 context math(context)
-snippet xn "[G] x_n" wA
-x_n
-endsnippet
-
-context math(context)
-snippet xi "[G] x_i" wA
-x_i
-endsnippet
-
-context math(context)
 priority 2
 # M not allowed to prevent matrix snippet expansion Mp1(10n)
 snippet `(?!M)_?(\w)p(\d)` "[G] _{n+d}" A
@@ -478,17 +464,6 @@ context math(context)
 priority 2
 snippet `_?(\w)m(\d)` "[G] _{n-d}" iA
 `` rv = `_{${m[1]}-${m[2]}}` ``
-endsnippet
-
-
-context math(context)
-snippet yn "[G] y_n" wA
-y_n
-endsnippet
-
-context math(context)
-snippet yi "[G] y_i" wA
-y_i
 endsnippet
 
 context math(context)

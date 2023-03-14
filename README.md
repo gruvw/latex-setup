@@ -1,4 +1,5 @@
 ![peek_final](https://user-images.githubusercontent.com/63407038/139681418-7e1c42a1-380f-4400-a875-0f1af9a4c3b9.gif)
+(result of `ssmkT0TT1/k!T=e=limnTTlr)1+1/nTT^n`, where `T` stands for the TAB key)
 
 # LaTeX Setup
 
@@ -10,6 +11,8 @@ It is the reason why I share my configuration in this repository.
 I am using [VSCode](https://code.visualstudio.com/) as my IDE for writing LaTeX.
 
 You will find my **VSCode settings** (regarding LaTeX) in the `settings.json` file.
+
+**Note**: My LaTeX Cheat Sheet template repository might also interest you <https://github.com/gruvw/cookiecutter-cheatsheet>!
 
 ### Extensions
 
@@ -34,6 +37,8 @@ You will find a CheatSheet on top of the `latex.hsnips` file 😉.
 
 If you want to add or modify a snippet, feel free to open an issue or a pull request.  
 If you don't understand a snippet feel free to open an issue or send me a message.
+
+_Note_: I created those snippets when I started taking live notes during Lectures at EPFL.
 
 ### VSCode snippets
 
