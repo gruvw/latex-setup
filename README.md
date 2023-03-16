@@ -1,5 +1,5 @@
 ![peek_final](https://user-images.githubusercontent.com/63407038/139681418-7e1c42a1-380f-4400-a875-0f1af9a4c3b9.gif)
-(result of `ssmkT0TT1/k!T=e=limnTTlr)1+1/nTT^n`, where `T` stands for the TAB key)
+(result of `SsmkT0TT1/k!T=e=LimnTTlr)1+1/nTT^n`, where `T` stands for the TAB key)
 
 # LaTeX Setup
 
@@ -58,7 +58,7 @@ Example format: `expression`: `replaced by`
 
 #### Examples
 
-What follows are some useful examples of snippets or snippets combinations:
+What follows are some useful examples of snippets or snippets combinations (`T` stands for the TAB key):
 
 ```text
 A21/L11: \frac{A_{21}}{L_{11}}
@@ -66,6 +66,7 @@ Mp321n: \begin{pmatrix}1 & 1\\1 & 1\\1 & 1\end{pmatrix} (with placeholders on va
 3zpsq/2: \frac{3\pi^2}{2}
 2(x-y)rt3: 2\sqrt[3]{x-y}
 aim3 inR#+*: a_{i-3} \in \mathbb{R}_+^*
+SsmkTTrTa_ikcdb_kj: \sum_{k=1}^{r} a_{ik}\cdot b_{kj}
 ```
 
 #### Document template
