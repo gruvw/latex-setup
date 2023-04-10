@@ -123,6 +123,8 @@
 # Vect -> \mathrm{Vect}
 # rg -> \mathrm{rg}
 # var -> \mathrm{var}
+# cov -> \mathrm{cov}
+# corr -> \mathrm{corr}
 
 # Auto:
 # `x1` -> x_1
@@ -356,7 +358,7 @@ endsnippet
 
 context math(context)
 snippet alim "[G] Arrow limit" wA
-\\xrightarrow[${1:x} \\to ${2:\infty}]{} 
+\\xrightarrow[${1:x} \\to ${2:\infty}]{$3} 
 endsnippet
 
 context math(context)
@@ -410,12 +412,12 @@ snippet `_([A-Za-z\d]{2})` "[G] Auto subscript 2" A
 endsnippet
 
 context math(context)
-snippet sq "[G] Square" iA
+snippet ` ?sq` "[G] Square" iA
 ^2
 endsnippet
 
 context math(context)
-snippet cb "[G] Cube" iA
+snippet ` ?cb` "[G] Cube" iA
 ^3
 endsnippet
 
@@ -454,7 +456,7 @@ snippet srt "[G] Square root" Ai
 endsnippet
 
 context math(context)
-snippet `\b(?<!\\)(?<!\\mathrm\{)(Vect|rg|var)` "[G] Special commands" A
+snippet `\b(?<!\\)(?<!\\mathrm\{)(Vect|rg|var|cov|corr)` "[G] Special commands" A
 `` rv = `\\mathrm{${m[1]}}` ``
 endsnippet
 
