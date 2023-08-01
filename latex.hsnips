@@ -57,6 +57,7 @@
 # sssec T-> \subsubsection{}
 # tld -> \widetilde{}
 # bnm -> \binom{n}{k}
+# vrb -> \verb''
 
 # Commands:
 # imm -> \implies
@@ -81,6 +82,7 @@
 # mto -> \mapsto 
 # lra -> \leftrightarrow 
 # Lra -> \Leftrightarrow 
+# Rra -> \Rightarrow 
 # qq -> \quad
 # .. -> \ldots
 # z`a` -> \alpha
@@ -101,8 +103,10 @@
 # dim -> \dim
 # ker -> \ker
 # det -> \det
-# in -> \in
-# not -> \not
+# in -> \in 
+# vee -> \vee 
+# wdg -> \wedge 
+# not -> \not 
 # sub -> \subset 
 # sup -> \supset 
 # sue -> \subseteq
@@ -118,6 +122,8 @@
 # prt -> \partial 
 # emp -> \emptyset
 # awb -> \allowbreak 
+# ang -> \langle \rangle
+# pro -> \propto 
 
 # Special commands (mathrm):
 # Vect -> \mathrm{Vect}
@@ -362,6 +368,11 @@ snippet alim "[G] Arrow limit" wA
 endsnippet
 
 context math(context)
+snippet `\b(?<!\\)ang` "[G] Angles" wA
+\\langle $1 \\rangle
+endsnippet
+
+context math(context)
 snippet dint "[G] Integral" wA
 \\int_{${1:-\\infty}}^{${2:\\infty}} 
 endsnippet
@@ -409,6 +420,11 @@ endsnippet
 context math(context)
 snippet `_([A-Za-z\d]{2})` "[G] Auto subscript 2" A
 `` rv = `_{${m[1]}}` ``
+endsnippet
+
+context math(context)
+snippet `\}(\d)` "[G] Auto subscript after }" A
+`` rv = `}_${m[1]}` ``
 endsnippet
 
 context math(context)
@@ -461,7 +477,7 @@ snippet `\b(?<!\\)(?<!\\mathrm\{)(Vect|rg|var|cov|corr)` "[G] Special commands" 
 endsnippet
 
 context math(context)
-snippet `\b(?<!\\)(?<!\\mathrm\{)(ker|det|deg|sin|cos|tan|cot|ln|exp|arg|to|perp|in|cup|cap|ge|le|sim|pm|iff|mid|dim|Im|Re|not)` "[G] Commands space" A
+snippet `\b(?<!\\)(?<!\\mathrm\{)(ker|det|deg|sin|cos|tan|cot|ln|exp|arg|to|perp|in|cup|cap|ge|le|sim|pm|iff|mid|dim|Im|Re|not|vee)` "[G] Commands space" A
 `` rv = `\\${m[1]} ` ``
 endsnippet
 
@@ -691,4 +707,24 @@ endsnippet
 context math(context)
 snippet `\b(?<!\\)prt` "[G] Partial" wA
 \\partial 
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)prp` "[G] Proportional" wA
+\\propto 
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)wdg` "[G] Wedge (AND)" wA
+\\wedge 
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)vrb` "[G] Verbatim" wA
+\\verb'$1'
+endsnippet
+
+context math(context)
+snippet `\b(?<!\\)Rra` "[G] Rightarrow" wA
+\\Rightarrow 
 endsnippet
