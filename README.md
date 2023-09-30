@@ -6,6 +6,15 @@
 Setting up a good LaTeX writing environment can be pretty hard (at least it has been for me 😅).
 It is the reason why I share my configuration in this repository.
 
+**Note**: see associated blog post on my website [LaTeX Writing Setup](https://gruvw.com/2021/05/17/latex-writing-setup.html).
+
+## No longer maintained
+
+I will no longer maintain or update this repository as I moved from VSCode to [Neovim](https://neovim.io/) for my primary text editor.  
+However, this repository still contains many interesting tips and snippets (especially regarding HyperSnips) that will probably be useful for you if you edit and build LaTeX documents using VSCode.
+
+**Note**: if you are interested in my Neovim config, take a look at my [Neovim dotfiles](https://github.com/gruvw/.dotfiles/tree/main/nvim/.config/nvim).
+
 ## Development environment
 
 I am using [VSCode](https://code.visualstudio.com/) as my IDE for writing LaTeX.
